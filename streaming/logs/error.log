@@ -1,0 +1,96 @@
+2018/07/18 20:12:46 [notice] 9452#5040: sockinit() attempting to access sockapi
+2018/07/18 20:12:46 [notice] 9452#5040: Access to sockapi succeded!
+2018/07/18 20:12:46 [notice] 9452#5040: using sockapi from "4;76;"
+2018/07/18 20:12:47 [notice] 10880#10640: sockinit() attempting to access sockapi
+2018/07/18 20:12:47 [notice] 10880#10640: Access to sockapi succeded!
+2018/07/18 20:12:47 [notice] 10880#10640: using sockapi from "4;8;"
+2018/07/18 20:24:56 [notice] 8440#9200: sockinit() attempting to access sockapi
+2018/07/18 20:24:56 [notice] 8440#9200: Access to sockapi succeded!
+2018/07/18 20:24:56 [notice] 8440#9200: using sockapi from "4;68;"
+2018/07/18 20:24:57 [notice] 8892#6120: sockinit() attempting to access sockapi
+2018/07/18 20:24:57 [notice] 8892#6120: Access to sockapi succeded!
+2018/07/18 20:24:57 [notice] 8892#6120: using sockapi from "4;8;"
+2018/07/18 20:25:20 [error] 8440#8144: *2 CreateFile() "G:\ngnix/streaming/hls/test.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test.m3u8 HTTP/1.1", host: "localhost:8080"
+2018/07/18 21:16:39 [error] 8892#9048: *14 CreateFile() "G:\ngnix/streaming/hls/test/index.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test/index.m3u8 HTTP/1.1", host: "localhost:8080"
+2018/07/18 21:16:59 [notice] 10328#11172: sockinit() attempting to access sockapi
+2018/07/18 21:16:59 [notice] 10328#11172: Access to sockapi succeded!
+2018/07/18 21:16:59 [notice] 10328#11172: using sockapi from "4;72;"
+2018/07/18 21:16:59 [notice] 1344#3524: sockinit() attempting to access sockapi
+2018/07/18 21:16:59 [notice] 1344#3524: Access to sockapi succeded!
+2018/07/18 21:16:59 [notice] 1344#3524: using sockapi from "4;8;"
+2018/07/18 21:17:21 [crit] 10328#2044: *1 record: all failed to open file 'streaming/saved//test-1531930641_18072018_211721.flv' (3: The system cannot find the path specified), client: 127.0.0.1, server: 0.0.0.0:1935
+2018/07/18 21:18:24 [crit] 10328#2044: *1 record: all failed to open file 'streaming/saved//test-1531930704_18072018_211824.flv' (3: The system cannot find the path specified), client: 127.0.0.1, server: 0.0.0.0:1935
+2018/07/18 21:19:26 [crit] 10328#2044: *1 record: all failed to open file 'streaming/saved//test-1531930766_18072018_211926.flv' (3: The system cannot find the path specified), client: 127.0.0.1, server: 0.0.0.0:1935
+2018/07/18 21:27:06 [error] 10328#2044: *5 CreateFile() "G:\ngnix/streaming/hls/test/index.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test/index.m3u8 HTTP/1.1", host: "localhost:8080"
+2018/07/18 21:32:16 [error] 1344#9080: *6 CreateFile() "G:\ngnix/streaming/hls/test/index.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test/index.m3u8 HTTP/1.1", host: "localhost:8080"
+2018/07/18 21:32:16 [error] 1344#9080: *7 CreateFile() "G:\ngnix/streaming/hls/test/index.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test/index.m3u8 HTTP/1.1", host: "localhost:8080"
+2018/07/18 21:32:39 [error] 1344#9080: *6 CreateFile() "G:\ngnix/streaming/hls/test/index.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test/index.m3u8 HTTP/1.1", host: "localhost:8080"
+2018/07/18 21:32:39 [error] 1344#9080: *9 CreateFile() "G:\ngnix/streaming/hls/test/index.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test/index.m3u8 HTTP/1.1", host: "localhost:8080"
+2018/07/18 21:33:24 [error] 10328#2044: *10 CreateFile() "G:\ngnix/streaming/hls/test/index.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test/index.m3u8 HTTP/1.1", host: "localhost:8080"
+2018/07/18 21:33:46 [error] 10328#2044: *10 CreateFile() "G:\ngnix/streaming/hls/test/index.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test/index.m3u8 HTTP/1.1", host: "localhost:8080"
+2018/07/18 21:33:46 [error] 10328#2044: *10 CreateFile() "G:\ngnix/streaming/hls/test/index.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test/index.m3u8 HTTP/1.1", host: "localhost:8080"
+2018/07/18 21:35:01 [notice] 4908#4184: sockinit() attempting to access sockapi
+2018/07/18 21:35:01 [notice] 4908#4184: Access to sockapi succeded!
+2018/07/18 21:35:01 [notice] 4908#4184: using sockapi from "4;68;"
+2018/07/18 21:35:01 [notice] 3244#1196: sockinit() attempting to access sockapi
+2018/07/18 21:35:01 [notice] 3244#1196: Access to sockapi succeded!
+2018/07/18 21:35:01 [notice] 3244#1196: using sockapi from "4;8;"
+2018/07/18 21:35:23 [crit] 4908#2024: *1 record: all failed to open file 'streaming/saved//test-1531931723_18072018_213523.flv' (3: The system cannot find the path specified), client: 127.0.0.1, server: 0.0.0.0:1935
+2018/07/18 21:36:03 [notice] 9452#8748: sockinit() attempting to access sockapi
+2018/07/18 21:36:03 [notice] 9452#8748: Access to sockapi succeded!
+2018/07/18 21:36:03 [notice] 9452#8748: using sockapi from "4;8;"
+2018/07/18 21:36:03 [notice] 6360#2208: sockinit() attempting to access sockapi
+2018/07/18 21:36:03 [notice] 6360#2208: Access to sockapi succeded!
+2018/07/18 21:36:03 [notice] 6360#2208: using sockapi from "4;8;"
+2018/07/18 21:36:27 [error] 9452#3184: *2 CreateFile() "G:\ngnix/streaming/hls/test/3.ts" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test/3.ts HTTP/1.1", host: "localhost:8080"
+2018/07/20 20:28:09 [notice] 3648#7300: sockinit() attempting to access sockapi
+2018/07/20 20:28:09 [notice] 3648#7300: Access to sockapi succeded!
+2018/07/20 20:28:09 [notice] 3648#7300: using sockapi from "4;8;"
+2018/07/20 20:28:09 [notice] 9032#5728: sockinit() attempting to access sockapi
+2018/07/20 20:28:09 [notice] 9032#5728: Access to sockapi succeded!
+2018/07/20 20:28:09 [notice] 9032#5728: using sockapi from "4;8;"
+2018/07/20 20:28:51 [error] 3648#1780: *2 CreateFile() "E:\OpenServer\domains\webcrew.ru\streaming/streaming/hls/test/index.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test/index.m3u8 HTTP/1.1", host: "localhost:8080"
+2018/07/20 20:29:05 [error] 3648#1780: *2 CreateFile() "E:\OpenServer\domains\webcrew.ru\streaming/streaming/hls/test/index.m3u8" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /hls/test/index.m3u8 HTTP/1.1", host: "localhost:8080"
+2018/07/20 20:29:25 [notice] 4588#10948: sockinit() attempting to access sockapi
+2018/07/20 20:29:25 [notice] 4588#10948: Access to sockapi succeded!
+2018/07/20 20:29:25 [notice] 4588#10948: using sockapi from "4;8;"
+2018/07/20 20:29:26 [notice] 1592#7032: sockinit() attempting to access sockapi
+2018/07/20 20:29:26 [notice] 1592#7032: Access to sockapi succeded!
+2018/07/20 20:29:26 [notice] 1592#7032: using sockapi from "4;8;"
+2018/07/20 20:30:26 [notice] 7296#6448: sockinit() attempting to access sockapi
+2018/07/20 20:30:26 [notice] 7296#6448: Access to sockapi succeded!
+2018/07/20 20:30:26 [notice] 7296#6448: using sockapi from "4;72;"
+2018/07/20 20:30:26 [notice] 4072#9540: sockinit() attempting to access sockapi
+2018/07/20 20:30:26 [notice] 4072#9540: Access to sockapi succeded!
+2018/07/20 20:30:26 [notice] 4072#9540: using sockapi from "4;8;"
+2018/07/20 20:41:27 [notice] 7668#8432: sockinit() attempting to access sockapi
+2018/07/20 20:41:27 [notice] 7668#8432: Access to sockapi succeded!
+2018/07/20 20:41:27 [notice] 7668#8432: using sockapi from "4;68;"
+2018/07/20 20:41:27 [notice] 10892#10320: sockinit() attempting to access sockapi
+2018/07/20 20:41:27 [notice] 10892#10320: Access to sockapi succeded!
+2018/07/20 20:41:27 [notice] 10892#10320: using sockapi from "4;8;"
+2018/07/20 20:47:54 [error] 7668#2208: *1 hls: rename failed: 'streaming/hls/test/index.m3u8.bak'->'streaming/hls/test/index.m3u8' (5: Access is denied), client: 127.0.0.1, server: 0.0.0.0:1935
+2018/07/20 20:48:14 [error] 7668#2208: *1 hls: rename failed: 'streaming/hls/test/index.m3u8.bak'->'streaming/hls/test/index.m3u8' (5: Access is denied), client: 127.0.0.1, server: 0.0.0.0:1935
+2018/07/20 20:48:35 [error] 7668#2208: *1 hls: rename failed: 'streaming/hls/test/index.m3u8.bak'->'streaming/hls/test/index.m3u8' (5: Access is denied), client: 127.0.0.1, server: 0.0.0.0:1935
+2018/07/20 20:48:56 [error] 7668#2208: *1 hls: rename failed: 'streaming/hls/test/index.m3u8.bak'->'streaming/hls/test/index.m3u8' (5: Access is denied), client: 127.0.0.1, server: 0.0.0.0:1935
+2018/07/20 20:49:17 [error] 7668#2208: *1 hls: rename failed: 'streaming/hls/test/index.m3u8.bak'->'streaming/hls/test/index.m3u8' (5: Access is denied), client: 127.0.0.1, server: 0.0.0.0:1935
+2018/07/20 20:49:38 [error] 7668#2208: *1 hls: rename failed: 'streaming/hls/test/index.m3u8.bak'->'streaming/hls/test/index.m3u8' (5: Access is denied), client: 127.0.0.1, server: 0.0.0.0:1935
+2018/07/20 20:49:52 [error] 7668#2208: *1 hls: rename failed: 'streaming/hls/test/index.m3u8.bak'->'streaming/hls/test/index.m3u8' (5: Access is denied), client: 127.0.0.1, server: 0.0.0.0:1935
+2018/07/20 20:49:53 [error] 10892#8776: hls: cleanup DeleteFile() failed on 'streaming/hls/test/index.m3u8' (32: The process cannot access the file because it is being used by another process)
+2018/07/20 20:49:54 [emerg] 8748#4644: "tcp_nopush" directive is duplicate in E:\OpenServer\domains\webcrew.ru\streaming/conf/nginx.conf:50
+2018/07/20 20:50:06 [notice] 2412#11068: sockinit() attempting to access sockapi
+2018/07/20 20:50:06 [notice] 2412#11068: Access to sockapi succeded!
+2018/07/20 20:50:06 [notice] 2412#11068: using sockapi from "4;8;"
+2018/07/20 20:50:06 [error] 2412#9088: hls: cleanup DeleteFile() failed on 'streaming/hls/test/index.m3u8' (32: The process cannot access the file because it is being used by another process)
+2018/07/20 20:51:04 [notice] 3180#1684: sockinit() attempting to access sockapi
+2018/07/20 20:51:04 [notice] 3180#1684: Access to sockapi succeded!
+2018/07/20 20:51:04 [notice] 3180#1684: using sockapi from "4;76;"
+2018/07/20 20:52:37 [error] 3180#8048: *1 hls: rename failed: 'streaming/hls/test/index.m3u8.bak'->'streaming/hls/test/index.m3u8' (5: Access is denied), client: 127.0.0.1, server: 0.0.0.0:1935
+2018/07/20 20:52:42 [error] 3180#8048: *1 hls: rename failed: 'streaming/hls/test/index.m3u8.bak'->'streaming/hls/test/index.m3u8' (5: Access is denied), client: 127.0.0.1, server: 0.0.0.0:1935
+2018/07/20 20:52:46 [error] 3180#8048: *1 hls: rename failed: 'streaming/hls/test/index.m3u8.bak'->'streaming/hls/test/index.m3u8' (5: Access is denied), client: 127.0.0.1, server: 0.0.0.0:1935
+2018/07/20 20:52:50 [error] 3180#8048: *1 hls: rename failed: 'streaming/hls/test/index.m3u8.bak'->'streaming/hls/test/index.m3u8' (5: Access is denied), client: 127.0.0.1, server: 0.0.0.0:1935
+2018/07/20 20:52:54 [error] 3180#8048: *1 hls: rename failed: 'streaming/hls/test/index.m3u8.bak'->'streaming/hls/test/index.m3u8' (5: Access is denied), client: 127.0.0.1, server: 0.0.0.0:1935
+2018/07/20 20:52:58 [error] 3180#8048: *1 hls: rename failed: 'streaming/hls/test/index.m3u8.bak'->'streaming/hls/test/index.m3u8' (5: Access is denied), client: 127.0.0.1, server: 0.0.0.0:1935
+2018/07/20 20:53:03 [error] 3180#8048: *1 hls: rename failed: 'streaming/hls/test/index.m3u8.bak'->'streaming/hls/test/index.m3u8' (5: Access is denied), client: 127.0.0.1, server: 0.0.0.0:1935
+2018/07/20 21:08:26 [error] 3180#8048: *2 CreateFile() "E:\OpenServer\domains\webcrew.ru\streaming/html/crossdomain.xml" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: , request: "GET /crossdomain.xml HTTP/1.1", host: "localhost:8000"
+2018/07/20 21:08:51 [error] 3180#8048: *5 access forbidden by rule, client: 127.0.0.1, server: 0.0.0.0:1935
