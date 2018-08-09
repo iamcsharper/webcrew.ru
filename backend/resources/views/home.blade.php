@@ -25,9 +25,10 @@
 
                 <div class="col-md-12">
                     <div id="app">
-                        <video-stream
-                                url="http://localhost:8000/live/test2.flv?uid={{ auth()->id() }}&token={{ auth()->user()->getRememberToken() }}"
-                                poster="http://static.smartisanos.cn/pr/img/video/video_03_cc87ce5bdb.jpg"></video-stream>
+                        {{--'video-stream', require('./components/VideoStream.vue')--}}
+                        {{--<video-stream--}}
+                                {{--url="http://localhost:8000/live/test2.flv?uid={{ auth()->id() }}&token={{ auth()->user()->getRememberToken() }}"--}}
+                                {{--poster="http://static.smartisanos.cn/pr/img/video/video_03_cc87ce5bdb.jpg"></video-stream>--}}
                     </div>
                 </div>
             </div>

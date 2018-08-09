@@ -40,11 +40,10 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}"/>
     <!-- responsive css -->
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}"/>
-    <!--[if IE]>
-    <script src="{{ asset('js/html5shiv.js') }}"></script><![endif]-->
+    <!--[if IE]><script src="{{ asset('js/html5shiv.js') }}"></script><![endif]-->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
-<body class="wow fadeIn">
+<body>
 <!-- start header -->
 <header>
     <!-- start navigation -->
@@ -123,7 +122,7 @@
     </nav>
     <!-- end navigation -->
 </header>
-<section class="wow fadeIn bg-extra-dark-gray mobile-height parallax md-position-relative no-padding"
+<section class="bg-extra-dark-gray mobile-height parallax md-position-relative no-padding"
          style="visibility: visible; animation-name: fadeIn; background: none 50% 50%,linear-gradient(rgba(14, 33, 61, 0.77),rgba(18,191,203,0.69)) 50% 50%,radial-gradient(circle at 55% 84%,#2d9cc5,#2f33a4);">
     <div class="container">
         <div class="row">
@@ -141,7 +140,15 @@
         </div>
     </div>
 </section>
-@yield('content')
+
+<!--@yield('content')-->
+
+{!! ssr('js/vue/entry-server.js')
+        ->context([
+            'user' => auth()->user(),
+        ])
+        ->fallback('<div id="app"></div>')
+        ->render() !!}
 <!-- start footer -->
 <footer class="wow fadeIn bg-extra-dark-gray">
     <div class="padding-50px-tb xs-padding-30px-tb">
@@ -149,7 +156,7 @@
             <div class="row">
                 <!-- start logo -->
                 <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                    Сайт ебать заовнен
+                    Чисто футер
                 </div>
                 <!-- end logo -->
             </div>
@@ -162,17 +169,16 @@
 <!-- end scroll to top  -->
 <!-- javascript libraries -->
 <script>
-    window.Laravel = {!! json_encode([
+    window.Laravel = @json([
             'csrfToken' => csrf_token(),
             'user' => auth()->user(),
-        ]) !!}
+        ])
 </script>
+
+<script src="{{ mix('js/vue/entry-client.js') }}"></script>
+
 @yield('libs')
-
-<script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
-
 <script type="text/javascript" src="{{ asset('js/blob.js') }}"></script>
-
 
 <script type="text/javascript" src="{{ asset('js/jquery.easing.1.3.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/skrollr.min.js') }}"></script>

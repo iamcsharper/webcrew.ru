@@ -12,10 +12,13 @@ let mix = require('laravel-mix');
  */
 
 mix
+    .js('resources/assets/js/vue/entry-server.js', 'public/js/vue')
+    .js('resources/assets/js/vue/entry-client.js', 'public/js/vue');
+
+mix
     .scripts([
         'jquery.js',
         'modernizr.js',
         'bootstrap.min.js',
     ].map((el)=>'public/js/' + el), 'public/js/blob.js')
-    .js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+    .sass('resources/assets/sass/app.scss', 'public/css');

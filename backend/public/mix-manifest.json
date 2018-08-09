@@ -1,5 +1,6 @@
 {
-    "/js/app.js": "/js/app.js",
+    "/js/vue/entry-client.js": "/js/vue/entry-client.js",
+    "/js/vue/entry-server.js": "/js/vue/entry-server.js",
     "/css/app.css": "/css/app.css",
     "/js/blob.js": "/js/blob.js"
 }
