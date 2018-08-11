@@ -70,6 +70,23 @@ class LoginController extends Controller
         );
     }
 
+    public function authenticated(Request $request, $user)
+    {
+        if (!$user->verified) {
+            $this->guard()->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            return response()->json([
+                'success' => false,
+                'errors' => ['Аккаунт не активарован. Проверьте вашу почту.'],
+                'csrf_token' => csrf_token()
+            ]);
+        }
+
+        return response()->json(['success' => true]);
+    }
+
     /**
      * @param Request $request
      * @throws ValidationException
@@ -77,10 +94,6 @@ class LoginController extends Controller
     protected function sendFailedLoginResponse(Request $request)
     {
         $request->session()->put('login_error', trans('auth.failed'));
-        throw ValidationException::withMessages(
-            [
-                'error' => [trans('auth.failed')],
-            ]
-        );
+        return response()->json(['errors' => ['Неверный логин или пароль']]);
     }
 }

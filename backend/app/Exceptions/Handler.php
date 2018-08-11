@@ -10,6 +10,7 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Foundation\Testing\HttpException;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\ValidationException;
+use Spatie\Permission\Exceptions\UnauthorizedException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
@@ -36,7 +37,7 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param  \Exception  $exception
+     * @param  \Exception $exception
      * @return void
      */
     public function report(Exception $exception)
@@ -47,12 +48,23 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into a response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $e
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Exception $e
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function render($request, Exception $e)
     {
+       if ($request->ajax()) {
+            $trace = $e->getMessage();
+
+            return response()->json([
+                'success' => false,
+                'errors' => [
+                    $trace
+                ]
+            ]);
+        }
+
         if ($e instanceof HttpResponseException) {
             return $e->getResponse();
         } elseif ($e instanceof ModelNotFoundException) {
@@ -61,6 +73,8 @@ class Handler extends ExceptionHandler
             return $this->unauthenticated($request, $e);
         } elseif ($e instanceof AuthorizationException) {
             $e = new HttpException(403, $e->getMessage());
+        } elseif ($e instanceof UnauthorizedException) {
+            return response()->view('errors.unauthorized', [], 403);
         } elseif ($e instanceof ValidationException && $e->getResponse()) {
             return $e->getResponse();
         }
@@ -69,6 +83,7 @@ class Handler extends ExceptionHandler
             return $this->toIlluminateResponse($this->renderHttpException($e), $e);
         } else {
             return $this->toIlluminateResponse($this->convertExceptionToResponse($e), $e);
+
         }
     }
 }

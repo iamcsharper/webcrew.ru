@@ -30,11 +30,13 @@ Route::get('/home/getTeachers/{skip?}/{take?}', 'HomeController@teachers');
 
 
 // Auth group
-Route::get('/verify/{token}', 'Auth\RegisterController@verify');
+Route::get('/register/{vue_capture?}', 'Auth\RegisterController@showRegistrationForm')->where('vue_capture', '[\/\w\.-]*');
+Route::get('/verify/{vue_capture?}', 'Auth\RegisterController@showRegistrationForm')->where('vue_capture', '[\/\w\.-]*');
+Route::post('/register/verify/{token}', 'Auth\RegisterController@verify');
 
 Route::get('/profile', 'Profile\ProfileController@index')->name('profile');
 
-Route::get('/admin','AdminController@index')->name('admin');
+Route::get('/admin/{vue_capture?}','AdminController@index')->name('admin')->where('vue_capture', '[\/\w\.-]*');
 
-Route::get('/admin/show','AdminController@show');
-Route::patch('/admin/remove/{id}','AdminController@remove');
+Route::get('/api/admin.show','AdminController@show');
+Route::patch('/api/admin.remove/{id}','AdminController@remove');

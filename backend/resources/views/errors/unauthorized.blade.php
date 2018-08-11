@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>404</title>
+    <title>403</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <style>
         html, body {
@@ -80,15 +80,15 @@
                              alt="">
                         <h2>Упс.</h2>
                     </div>
-                    <h1 class="huge">404</h1>
+                    <h1 class="huge">403</h1>
                 </div>
                 <div class="col-md-8 col-xs-12 center-col">
-                    <h2>Такой страницы не существует. Если вы думаете, что это ошибка, дайте нам знать</h2>
-                    <a href="mailto:ilyhaa19@gmail.com" class="btn btn-lg btn-block btn-primary">Отправить
+                    <h2>Доступ к этой странице ограничен. Если вы считаете, что это ошибка, дайте нам знать.</h2>
+                    <a href="mailto:ilyhaa19@gmail.com?subject=403 error on {{url()->full()}}" class="btn btn-lg btn-block btn-primary">Отправить
                         письмо</a>
                     <hr>
                     <div class="text-center">
-                    <a href="{{ (redirect()->back()->getTargetUrl() != url()->full()) ? redirect()->back()->getTargetUrl() : route('home')  }}" class="btn btn-link ">Вернуться назад</a>
+                        <a href="{{ (redirect()->back()->getTargetUrl() != url()->full()) ? redirect()->back()->getTargetUrl() : route('home')  }}" class="btn btn-link ">Вернуться назад</a>
                     </div>
                 </div>
             </div>

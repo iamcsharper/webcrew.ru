@@ -12,7 +12,7 @@ export default new Store({
     getters: {
         user: state => state.user,
         userId: state => state.user ? state.user.id : undefined,
-        role: state => state.user ? state.user.roles[0].name : undefined,
+        role: state => state.user ? state.user.roles ? state.user.roles[0].name : undefined : undefined,
     },
 
     mutations: {

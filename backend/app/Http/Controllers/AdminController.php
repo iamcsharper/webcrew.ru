@@ -28,7 +28,7 @@ class AdminController extends Controller
 
     public function show() {
         return response()->json([
-            'errors' => [],
+            'success' => true,
             'users' => User::all(),
         ]);
     }
@@ -43,6 +43,7 @@ class AdminController extends Controller
 
         if (is_null($user)) {
             return response()->json([
+                'success' => false,
                 'errors' => ['user_not_found']
             ]);
         }
@@ -50,7 +51,7 @@ class AdminController extends Controller
         $user->delete();
 
         return response()->json([
-            'errors' => [],
+            'success' => true,
         ]);
     }
 }

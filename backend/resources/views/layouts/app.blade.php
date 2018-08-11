@@ -52,7 +52,7 @@
             <div class="row">
                 <!-- start logo -->
                 <div class="col-lg-2 col-md-2 col-xs-5">
-                    <a href="/" title="WebCrew" class="logo"><img src="{{ asset('images/logo.png') }}"
+                    <a title="WebCrew" class="logo"><img src="{{ asset('images/logo.png') }}"
                                                                   data-rjs="images/logo@2x.png" class="logo-dark"
                                                                   alt="Pofo"><img
                                 src="{{ asset('images/logo-white.png') }}" data-rjs="images/logo-white@2x.png"
@@ -70,11 +70,11 @@
                     <div class="navbar-collapse collapse no-padding-right" id="navbar-collapse-toggle-1">
                         <ul class="nav navbar-nav navbar-right alt-font text-normal">
                             @role('student')
-                            <li class="nav-item"><a href="{{route('home')}}" class="inner-link">Поиск</a></li>
+                            <li class="nav-item"><a href="{{route('home')}}" class="inner-link reactive">Поиск</a></li>
                             <li class="nav-item"><a href="#" class="inner-link">Мои подиски</a></li>
                             @endrole
                             @role('teacher')
-                            <li class="nav-item"><a href="{{route('home')}}" class="inner-link">Мои ученики</a></li>
+                            <li class="nav-item"><a href="{{route('home')}}" class="inner-link reactive">Мои ученики</a></li>
                             @endrole
                             @role('admin')
                             <li class="nav-item"><a href="">Сл. стрим</a></li>
@@ -82,10 +82,10 @@
                             @endrole
                             @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">Вход</a>
+                                <a class="nav-link reactive" href="{{ route('login') }}">Вход</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">Регистрация</a>
+                                <a class="nav-link reactive" href="{{ route('register') }}">Регистрация</a>
                             </li>
                             @else
                                 <li class="dropdown simple-dropdown nav-item">
@@ -96,9 +96,9 @@
                                     <ul class="dropdown-menu animated fadeInDown" role="menu">
                                         <li>
                                             @can('access admin')
-                                                <a class="dropdown-item" href="{{ route('admin') }}">Админпанель</a>
+                                                <a class="dropdown-item reactive" href="{{ route('admin') }}">Админпанель</a>
                                                 @endif
-                                                <a class="dropdown-item" href="/profile">Мой профиль</a>
+                                                <a class="dropdown-item reactive" href="/profile">Мой профиль</a>
                                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Выйти</a>
                                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
@@ -172,6 +172,7 @@
     window.Laravel = @json([
             'csrfToken' => csrf_token(),
             'user' => auth()->user(),
+            'baseUrl' => URL::to('/')
         ])
 </script>
 

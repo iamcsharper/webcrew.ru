@@ -109,7 +109,7 @@
 </header>
 <!-- end header -->
 <!-- start hero section -->
-<section id="home" class="no-padding parallax mobile-height md-position-relative wow fadeIn"
+<section id="home" class="no-padding parallax full-height md-position-relative wow fadeIn"
          data-stellar-background-ratio="0.5"
          style="background-color:#000614;background-image:url('{{ asset('images/pofo-demo-parallax.jpg') }}');">
         <!-- <div class="opacity-medium bg-extra-dark-gray display-none md-display-block"></div>-->
@@ -134,7 +134,7 @@
 </section>
 <!-- end info section -->
 <!-- start webinar section-->
-<section id="online" class="no-padding parallax mobile-height md-position-relative wow fadeIn"
+<section id="online" class="no-padding parallax full-height md-position-relative wow fadeIn"
          data-stellar-background-ratio="0"
          style="background-image:url('{{ asset('images/webinar-background.jpg') }}');">
     <div class="opacity-medium bg-black"></div>
@@ -435,8 +435,9 @@
                         Регистрируйтесь прямо сейчас</h2>
                     <a href="{{ route('register') }}"
                        class="btn btn-deep-pink btn-large btn-rounded">зарегистрироваться</a>
-                    @endif
+                    @else
                     <h6 class="margin-20px-bottom font-weight-300">Спасибо, что остаетесь с нами</h6>
+					@endif
                 </div>
             </div>
         </div>

@@ -86,7 +86,7 @@ class RegisterController extends Controller
      * Handle a registration request for the application.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function register(Request $request)
     {
@@ -96,6 +96,13 @@ class RegisterController extends Controller
         try {
             $validator->validate();
         } catch (ValidationException $e) {
+            if ($request->ajax()) {
+                return response()->json([
+                    'success' => false,
+                    'errors' => $validator->errors()->toArray()
+                ]);
+            }
+
             return view('auth/register')->withErrors($validator);
         }
 
@@ -105,6 +112,16 @@ class RegisterController extends Controller
 
         event(new Registered($user));
         dispatch(new SendVerificationEmail($user));
+
+        $result = $user;
+        $result['roles'] = $user->getRoleNames();
+
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'user' => $result
+            ]);
+        }
 
         return view('auth/verification');
     }
@@ -122,13 +139,17 @@ class RegisterController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return view('auth.error', ['error' => 'bad_token']);
+            return $request->ajax() ? response()->json([
+                'success' => false,
+                'errors' => ['Пустой код']]) : view('auth.error', ['error' => 'bad_token']);
         }
 
         $user = User::where('email_token', $request->token)->first();
 
         if (is_null($user)) {
-            return view('auth.error', ['error' => 'no_user']);
+            return $request->ajax() ? response()->json([
+                'success' => false,
+                'errors' => ['Неверный код']]) : view('auth.error', ['error' => 'no_user']);
         }
 
         $user->verified = 1;
@@ -137,7 +158,11 @@ class RegisterController extends Controller
         if ($user->save()) {
             Auth::loginUsingId($user->id);
             //return view('auth.emailconfirm', ['user' => $user]);
-            return redirect('/home');
+
+            return $request->ajax() ? response()->json([
+                'success' => true,
+                'user' => $user,
+            ]) : redirect('/home');
         }
     }
 }

@@ -33,7 +33,7 @@ class EmailVerification extends Mailable
     {
         return $this->view('email.email')->with([
             'user' => $this->user,
-            'url' => url('/verify/' . $this->user->email_token),
+            'url' => url('/register/verify/' . $this->user->email_token),
             'role' => $this->user->getRoleNames()[0],
         ]);
     }

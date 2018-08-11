@@ -11,7 +11,8 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
-} catch (e) {}
+} catch (e) {
+}
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -35,7 +36,7 @@ if (token) {
     window.axios.defaults.headers.common = {
         'X-CSRF-TOKEN': token.content,
         'X-Requested-With': 'XMLHttpRequest',
-       // 'Authorization': 'Bearer ' + window.Laravel.apiToken,
+        // 'Authorization': 'Bearer ' + window.Laravel.apiToken,
     };
 
 } else {
@@ -48,8 +49,14 @@ if (token) {
  * allows your team to easily build robust real-time web applications.
  */
 
-$(document).ready(function() {
-
+$(document).ready(function () {
+    $('a.reactive').each(function () {
+        $(this).on('click', function (e) {
+            const next = $(this).attr('href').replace(window.Laravel.baseUrl, '');
+            window.Vue.$router.push(next);
+            e.preventDefault();
+        });
+    });
 });
 
 // import Echo from 'laravel-echo'
