@@ -26,7 +26,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/home/getTeachers/{skip?}/{take?}', 'HomeController@teachers');
+Route::get('/api/home.getClasses/{skip?}/{take?}', 'HomeController@apiClasses');
 
 
 // Auth group

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
@@ -21,7 +22,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'email_token', 'money', 'promo_img', 'promo_desc'
+        'name', 'email', 'password', 'email_token', 'money',
+        'promo_img', 'promo_desc', 'speciality'
     ];
 
     /**
@@ -34,17 +36,22 @@ class User extends Authenticatable
     ];
 
     /**
-     * Assume this is a teacher
+     * Assume this is a student
      */
-    function pupils() {
-        return $this->belongsToMany('App\User', 'students_subscriptions', 'student_id', 'teacher_id');
+    public function student_classes() {
+        return $this->belongsToMany('App\EducationalClass', 'students_subscriptions', 'class_id', 'student_id')->withTimestamps();
     }
 
     /**
-     * Assume this is a student
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * Assume this is a teacher
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    function tutors() {
-        return $this->belongsToMany('App\User', 'students_subscriptions', 'teacher_id', 'student_id');
+    public function teacher_classes() {
+        return $this->hasMany('App\EducationalClass', 'teacher_id');
+    }
+
+    public function getCreatedAtAttribute($date)
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('c');
     }
 }

@@ -54,13 +54,18 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-       if ($request->ajax()) {
+        if ($request->ajax()) {
             $trace = $e->getMessage();
+
+            if (is_null($trace) || $trace == "") {
+                $trace = explode('\\', get_class($e));
+                $trace = $trace[count($trace) - 1];
+            }
 
             return response()->json([
                 'success' => false,
                 'errors' => [
-                    $trace
+                    ['text' => $trace]
                 ]
             ]);
         }

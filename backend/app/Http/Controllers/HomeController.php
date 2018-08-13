@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\EducationalClass;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -27,7 +28,7 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function teachers(Request $request)
+    public function apiClasses(Request $request)
     {
         if (!$request->ajax()) {
             return [
@@ -35,7 +36,7 @@ class HomeController extends Controller
             ];
         }
 
-        $query = User::role('teacher');
+        $query = EducationalClass::with('teacher');
 
         if($request->skip) {
             $query = $query->skip($request->skip);
@@ -50,7 +51,7 @@ class HomeController extends Controller
         }
 
         return [
-            'teachers' => $query->get(),
+            'classes' => $query->get(),
         ];
     }
 }

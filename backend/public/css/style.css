@@ -3819,6 +3819,7 @@ aside .latest-post li figure {width: 75px;}
 .text-dark-blue {color: #2f3542}
 .text-orange {color: #ff6b4a}
 .text-light-orange {color: #ff806a;}
+.text-success { color: #5cb85c }
 
 .custom-chooser { margin-bottom: 15px;overflow:hidden }
 .custom-chooser>.btn input[type=radio] { position: absolute; clip: rect(0,0,0,0); pointer-events: none; }

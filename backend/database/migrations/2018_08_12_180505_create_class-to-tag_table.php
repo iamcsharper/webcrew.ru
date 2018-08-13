@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class StudentsSubscriptions extends Migration
+class CreateClassToTagTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class StudentsSubscriptions extends Migration
      */
     public function up()
     {
-        Schema::create('students_subscriptions', function (Blueprint $table) {
+        Schema::create('class_tags', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('student_id');
+            $table->unsignedInteger('tag_id');
             $table->unsignedInteger('class_id');
             $table->timestamps();
-            $table->softDeletes(); // Статистика покупок для пользователя
         });
     }
 
@@ -29,6 +28,6 @@ class StudentsSubscriptions extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('students_subscriptions');
+        Schema::dropIfExists('class_tags');
     }
 }
