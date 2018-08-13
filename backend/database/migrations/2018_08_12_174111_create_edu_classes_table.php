@@ -19,7 +19,7 @@ class CreateEduClassesTable extends Migration
             $table->string('name'); // Название курса
             $table->integer('price'); // Цена подписки
             $table->integer('max_places'); // Максимальное количество подписок
-            $table->float('rating'); // Максимальное количество подписок
+            $table->float('rating')->nullable(); // Максимальное количество подписок
             $table->timestamp('next_date')->nullable(); // Запланированная дата занятия
             $table->timestamps();
         });
