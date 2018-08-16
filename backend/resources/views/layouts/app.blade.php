@@ -74,11 +74,12 @@
                             <li class="nav-item"><a href="#" class="inner-link">Мои подиски</a></li>
                             @endrole
                             @role('teacher')
-                            <li class="nav-item"><a href="{{route('home')}}" class="inner-link reactive">Мои ученики</a></li>
+                            <li class="nav-item"><a href="{{route('home')}}" class="inner-link reactive">Список учителей</a></li>
+                            <li class="nav-item"><a href="{{route('courses')}}" class="inner-link reactive">Мои курсы</a></li>
                             @endrole
                             @role('admin')
-                            <li class="nav-item"><a href="">Сл. стрим</a></li>
-                            <li class="nav-item"><a href="">Статистика</a></li>
+                            <li class="nav-item "><a href="{{route('home')}}" class="inner-link reactive">Список учителей</a></li>
+                            {{--<li class="nav-item"><a href="" class="inner-link reactive">Случ. стрим</a></li>--}}
                             @endrole
                             @guest
                             <li class="nav-item">
@@ -150,19 +151,19 @@
         ->fallback('<div id="app"></div>')
         ->render() !!}
 <!-- start footer -->
-<footer class="wow fadeIn bg-extra-dark-gray">
-    <div class="padding-50px-tb xs-padding-30px-tb">
-        <div class="container">
-            <div class="row">
-                <!-- start logo -->
-                <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                    Чисто футер
-                </div>
-                <!-- end logo -->
-            </div>
-        </div>
-    </div>
-</footer>
+{{--<footer class="wow fadeIn bg-extra-dark-gray">--}}
+    {{--<div class="padding-50px-tb xs-padding-30px-tb">--}}
+        {{--<div class="container">--}}
+            {{--<div class="row">--}}
+                {{--<!-- start logo -->--}}
+                {{--<div class="col-md-12 col-sm-12 col-xs-12 text-center">--}}
+                    {{--Чисто футер--}}
+                {{--</div>--}}
+                {{--<!-- end logo -->--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</div>--}}
+{{--</footer>--}}
 <!-- end footer -->
 <!-- start scroll to top -->
 <a class="scroll-top-arrow" href="javascript:void(0);"><i class="ti-arrow-up"></i></a>
@@ -217,7 +218,6 @@
 <!-- justified gallery  -->
 <script type="text/javascript" src="{{ asset('js/justified-gallery.min.js') }}"></script>
 <!--pie chart-->
-<script type="text/javascript" src="{{ asset('js/jquery.easypiechart.min.js') }}"></script>
 <!-- retina -->
 <script type="text/javascript" src="{{ asset('js/retina.min.js') }}"></script>
 

@@ -465,7 +465,7 @@ textarea.input-bg {background-color: #f7f7f7; border-radius: 4px; border: 1px so
     Border
 ====================================== */
 
-.border-all {border: 1px solid #ededed}
+.border-all {border: 1px solid #e5e5e5}
 
 /* boder width */
 .border-width-1 {border-width:1px;}
@@ -3820,6 +3820,9 @@ aside .latest-post li figure {width: 75px;}
 .text-orange {color: #ff6b4a}
 .text-light-orange {color: #ff806a;}
 .text-success { color: #5cb85c }
+.line-height-200 {line-height: 200%;}
+
+.v-middle {vertical-align: middle}
 
 .custom-chooser { margin-bottom: 15px;overflow:hidden }
 .custom-chooser>.btn input[type=radio] { position: absolute; clip: rect(0,0,0,0); pointer-events: none; }
@@ -3848,3 +3851,5 @@ aside .latest-post li figure {width: 75px;}
         transform: scale(1);
     }
 }
+
+.subscribed-course { background: #e2f3e2; }

@@ -6,7 +6,7 @@ import App from './components/App'
 import vueMoment from 'vue-moment'
 import moment from "moment";
 
-require('moment/locale/ru')
+require('moment/locale/ru');
 
 Vue.use(vueMoment, {
     moment
@@ -14,10 +14,9 @@ Vue.use(vueMoment, {
 
 sync(store, router);
 
-export default new Vue({
+export default {
+    Vue,
     store,
-
     router,
-
     render: h => h(App),
-});
+};

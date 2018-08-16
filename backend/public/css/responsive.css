@@ -149,6 +149,10 @@
     .box-layout .skillbar-bar-style2 .skillbar {width: 75%}
 }
 
+@media (min-width: 1200px) {
+    .lg-text-right {text-align: right;}
+}
+
 @media (max-width: 1199px) {
     .panel-group * { transition-timing-function: none; -moz-transition-timing-function: none; -webkit-transition-timing-function: none; -o-transition-timing-function: none; transition-duration: 0s; -ms-transition-timing-function: none; -moz-transition-duration: 0s; -webkit-transition-duration: 0s; -o-transition-duration: 0s; }
     section {padding: 90px 0}

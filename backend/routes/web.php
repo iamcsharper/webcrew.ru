@@ -25,8 +25,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home/{vue_capture?}', 'HomeController@index')->name('home')->where('vue_capture', '[\/\w\.-]*');
+Route::get('/courses/{vue_capture?}', 'HomeController@index')->name('courses')->where('vue_capture', '[\/\w\.-]*');
+
 Route::get('/api/home.getClasses/{skip?}/{take?}', 'HomeController@apiClasses');
+// As teacher
+Route::get('/api/home.getMyJobClasses/{skip?}/{take?}', 'HomeController@apiMyJobClasses');
+Route::get('/api/home.getMyClasses/{skip?}/{take?}', 'HomeController@apiMyClasses');
 
 
 // Auth group

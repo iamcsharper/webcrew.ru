@@ -28,15 +28,14 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function apiClasses(Request $request)
-    {
-        if (!$request->ajax()) {
-            return [
-                'error' => 'non_ajax_query'
-            ];
-        }
-
-        $query = EducationalClass::with('teacher');
+    private function classesBuilder(Request $request) {
+        $query = EducationalClass::with([
+            'teacher:id,name',
+        ])->withCount([
+            'students' => function ($query) {
+                $query->select('students_subscriptions.student_id')->where(['students_subscriptions.student_id' => auth()->id(), 'students_subscriptions.deleted_at' => null]);
+            }
+        ]);
 
         if($request->skip) {
             $query = $query->skip($request->skip);
@@ -50,8 +49,50 @@ class HomeController extends Controller
             $query = $query->limit(1000);
         }
 
+        return $query;
+    }
+
+    public function apiMyJobClasses(Request $request)
+    {
+        if (!$request->ajax()) {
+            return [
+                'error' => 'non_ajax_query'
+            ];
+        }
+
         return [
-            'classes' => $query->get(),
+            'classes' => $this->classesBuilder($request)
+                ->where('teacher_id', auth()->id())
+                ->get(),
+        ];
+    }
+
+    public function apiMyClasses(Request $request)
+    {
+        if (!$request->ajax()) {
+            return [
+                'error' => 'non_ajax_query'
+            ];
+        }
+
+        return [
+            'classes' => $this->classesBuilder($request)
+                ->where('teacher_id', auth()->id())
+                ->get(),
+        ];
+    }
+
+    public function apiClasses(Request $request)
+    {
+        if (!$request->ajax()) {
+            return [
+                'error' => 'non_ajax_query'
+            ];
+        }
+
+        return [
+            'classes' => $this->classesBuilder($request)
+                ->get(),
         ];
     }
 }

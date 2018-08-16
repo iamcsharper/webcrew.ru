@@ -29,6 +29,9 @@ class EducationalClass extends Model
 
     public function getCreatedAtAttribute($date)
     {
+        if (is_null($date))
+            return null;
+
         return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('c');
     }
 
@@ -37,6 +40,10 @@ class EducationalClass extends Model
     }
 
     public function tags() {
-        return $this->belongsToMany('App\Tag', 'class_tags', 'tag_id', 'class_id');
+        return $this->belongsToMany(Tag::class, 'class_tags', 'tag_id', 'class_id');
+    }
+
+    public function students() {
+        return $this->belongsToMany(User::class, 'students_subscriptions', 'student_id', 'class_id');
     }
 }

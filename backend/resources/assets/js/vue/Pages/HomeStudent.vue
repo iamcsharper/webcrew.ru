@@ -1,6 +1,6 @@
 <template>
     <div>
-        <section class="bg-white wow fadeIn padding-65px-tb">
+        <section class="bg-white padding-65px-tb">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12 text-center center-col last-paragraph-no-margin margin-50px-bottom  sm-margin-50px-bottom xs-margin-30px-bottomm">
@@ -53,7 +53,7 @@
                                 <div class="col-md-12">
                                     <div class="margin-20px-bottom">
                                         <div class="col-md-12 col-sm-12 col-xs-12 blog-post-content margin-30px-bottom xs-margin-30px-bottom xs-text-center" v-for="educationalClass in classes">
-                                            <div class="blog-text border-all display-inline-block width-100 padding-30px-all xs-padding-20px-all no-padding-bottom">
+                                            <div class="blog-text border-all display-inline-block width-100 padding-30px-all xs-padding-20px-all no-padding-bottom" :class="{'subscribed-course': educationalClass.students_count}">
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <h6 class="font-weight-600 text-extra-dark-gray">{{ educationalClass.name }}</h6>
@@ -134,8 +134,8 @@
     </div>
 </template>
 <script>
-    import InfiniteLoading from 'vue-infinite-loading';
     import axios from 'axios'
+    import InfiniteLoading from 'vue-infinite-loading'
 
     export default {
         components: {
@@ -156,6 +156,7 @@
                 this.busy = true;
                 axios.get('/api/home.getClasses/0/9').then((response) => {
                     this.classes = response.data.classes;
+
                     this.busy = false;
 
                     this.mounted = true;

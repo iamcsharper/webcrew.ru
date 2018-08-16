@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import uniq from 'lodash/uniq';
 import Vuex, { Store } from 'vuex';
 
 Vue.use(Vuex);
@@ -7,17 +6,20 @@ Vue.use(Vuex);
 export default new Store({
     state: {
         user: {},
+        role: 'guest'
     },
 
     getters: {
-        user: state => state.user,
+        user: (state) => state.user,
         userId: state => state.user ? state.user.id : undefined,
-        role: state => state.user ? state.user.roles ? state.user.roles[0].name : undefined : undefined,
     },
 
     mutations: {
         setUser(state, user) {
             state.user = user;
+            if (user && user.roles) {
+                state.role = user.roles[0].name;
+            }
         },
     },
 });

@@ -31,7 +31,7 @@
             </tbody>
         </table>
 
-        <button class="btn btn-large btn-white" @click="update">
+        <button class="btn btn-large btn-black" @click="update">
             <span v-if="!is_refresh">Загрузить</span>
             <span v-if="is_refresh"><i class="fas fa-spinner"></i> Загрузка...</span>
         </button>

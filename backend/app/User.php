@@ -22,7 +22,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'email_token', 'money',
+        'name', 'email', 'password', 'email_token', 'money', 'number',
         'promo_img', 'promo_desc', 'speciality'
     ];
 
@@ -34,6 +34,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token', 'email_token', 'number'
     ];
+
+    // Личное
+    protected $personal = ['email', 'money', 'number'];
+
+    public function getPersonal() {
+        return $this->personal;
+    }
 
     /**
      * Assume this is a student

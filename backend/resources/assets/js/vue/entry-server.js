@@ -1,11 +1,16 @@
 /* global context, dispatch */
 
-import app from './app';
+import appSettings from './app';
+import addMiddleware from './addMiddleware';
 import renderVueComponentToString from 'vue-server-renderer/basic';
 
-app.$router.push(context.url);
+appSettings.store.commit('setUser', context.user);
 
-app.$store.commit('setUser', { user: context.user });
+addMiddleware(appSettings);
+
+const app = new appSettings.Vue(appSettings);
+
+app.$router.push(context.url);
 
 renderVueComponentToString(app, (err, html) => {
     if (err) {
