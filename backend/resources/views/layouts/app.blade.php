@@ -21,7 +21,7 @@
     <!-- et line icon -->
     <link rel="stylesheet" href="{{ asset('css/et-line-icons.css') }}"/>
     <!-- font-awesome icon -->
-    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     <!-- themify icon -->
     <link rel="stylesheet" href="{{ asset('css/themify-icons.css') }}">
     <!-- swiper carousel -->
@@ -71,7 +71,7 @@
                         <ul class="nav navbar-nav navbar-right alt-font text-normal">
                             @role('student')
                             <li class="nav-item"><a href="{{route('home')}}" class="inner-link reactive">Поиск</a></li>
-                            <li class="nav-item"><a href="#" class="inner-link">Мои подиски</a></li>
+                            <li class="nav-item"><a href="{{ route('courses') }}" class="inner-link reactive">Мои подиски</a></li>
                             @endrole
                             @role('teacher')
                             <li class="nav-item"><a href="{{route('home')}}" class="inner-link reactive">Список учителей</a></li>
@@ -123,8 +123,7 @@
     </nav>
     <!-- end navigation -->
 </header>
-<section class="bg-extra-dark-gray mobile-height parallax md-position-relative no-padding"
-         style="visibility: visible; animation-name: fadeIn; background: none 50% 50%,linear-gradient(rgba(14, 33, 61, 0.77),rgba(18,191,203,0.69)) 50% 50%,radial-gradient(circle at 55% 84%,#2d9cc5,#2f33a4);">
+<section class="bg-gradient mobile-height parallax md-position-relative no-padding">
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12 display-table extra-small-screen page-title-medium">

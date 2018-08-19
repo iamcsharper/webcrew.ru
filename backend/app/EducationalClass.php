@@ -16,6 +16,10 @@ class EducationalClass extends Model
         'next_date', 'price', 'max_places', 'teacher_id', 'name'
     ];
 
+    protected $hidden = [
+        'pivot'
+    ];
+
     /**
      * Use created_at, updated_at
      * @var bool
@@ -26,6 +30,17 @@ class EducationalClass extends Model
      * @var string
      */
     protected $table = 'edu_classes';
+
+    public static function getClassesWithActiveUser($uid) {
+        return self::with([
+            'teacher:id,name,promo_img,promo_desc',
+            'tags:name'
+        ])->withCount([
+            'students' => function ($query) use ($uid) {
+                $query->select('students_subscriptions.student_id')->where(['students_subscriptions.student_id' => $uid, 'students_subscriptions.deleted_at' => null]);
+            }
+        ]);
+    }
 
     public function getCreatedAtAttribute($date)
     {

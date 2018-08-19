@@ -438,6 +438,10 @@ textarea.input-bg {background-color: #f7f7f7; border-radius: 4px; border: 1px so
 .btn.btn-transparent-light-gray:hover, .btn.btn-transparent-light-gray:focus {background: #dbdbdb; border-color: #dbdbdb; color: #232323}
 .btn.btn-transparent-deep-pink {background: transparent; border-color: #ff214f; color: #ff214f}
 .btn.btn-transparent-deep-pink:hover, .btn.btn-transparent-deep-pink:focus {background: #ff214f; border-color: #ff214f; color: #fff}
+.btn.btn-transparent-extra-medium-gray {background: transparent; border-color:#757575; color: #757575;}
+.btn.btn-transparent-extra-medium-gray:hover,.btn.btn-transparent-extra-medium-gray:focus {background: #757575; border-color:#757575; color: #fff;}
+.btn.btn-transparent-medium-gray {background: transparent; border-color:#9fa1a3; color:#9fa1a3;}
+.btn.btn-transparent-medium-gray:hover,.btn.btn-transparent-medium-gray:focus {background: #9fa1a3; border-color:#9fa1a3; color:#fff;}
 
 /* button rounded */
 .btn.btn-rounded {border-radius: 50px}
@@ -465,7 +469,7 @@ textarea.input-bg {background-color: #f7f7f7; border-radius: 4px; border: 1px so
     Border
 ====================================== */
 
-.border-all {border: 1px solid #e5e5e5}
+.border-all {border: 2px solid #e5e5e5}
 
 /* boder width */
 .border-width-1 {border-width:1px;}
@@ -3819,8 +3823,10 @@ aside .latest-post li figure {width: 75px;}
 .text-dark-blue {color: #2f3542}
 .text-orange {color: #ff6b4a}
 .text-light-orange {color: #ff806a;}
-.text-success { color: #5cb85c }
+.text-success { color: #4AAE9B }
 .line-height-200 {line-height: 200%;}
+
+.label-success {background-color: #4AAE9B;}
 
 .v-middle {vertical-align: middle}
 
@@ -3832,6 +3838,15 @@ aside .latest-post li figure {width: 75px;}
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
     opacity: 0;
+}
+
+.rating-on { color: #f9ca24}
+.rating-off { color: #f6e58d}
+
+.bg-gradient {
+    visibility: visible;
+    animation-name: fadeIn;
+    background: none 50% 50%,linear-gradient(rgba(14, 33, 61, 0.77),rgba(18,191,203,0.69)) 50% 50%,radial-gradient(circle at 55% 84%,#4AAE9B,#286db3);
 }
 
 .bounce-enter-active {
@@ -3852,4 +3867,61 @@ aside .latest-post li figure {width: 75px;}
     }
 }
 
-.subscribed-course { background: #e2f3e2; }
+/* modal */
+.modal-backdrop {
+    position: fixed;
+    z-index: 9998;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    display: table;
+    transition: opacity .3s ease;
+}
+
+.modal-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.modal-fade-enter,
+.modal-fade-leave-active {
+    opacity: 0;
+}
+
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+    transition: opacity .5s ease
+}
+
+.btn-green {
+    color: white;
+    background: #4AAE9B;
+    border: 1px solid #4AAE9B;
+    border-radius: 2px;
+}
+
+.subscribed-course {
+    border-color: #bfe3c0;
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+.subscribed-course .course-header {
+    padding: 30px;
+    background: none 50% 50%,linear-gradient(rgba(14, 33, 61, 0.07),rgba(18,191,203,0.69)) 50% 50%,linear-gradient(to right bottom, #867eff, #51d284bf);
+}
+
+.subscribed-course .course-content {
+    padding-top: 25px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.subscribed-course .course-header > * {
+    margin: 0;
+}
+
+
+#app {min-height: 700px;}

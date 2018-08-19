@@ -21,7 +21,7 @@
     <!-- et line icon -->
     <link rel="stylesheet" href="{{ asset('css/et-line-icons.css') }}"/>
     <!-- font-awesome icon -->
-    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     <!-- themify icon -->
     <link rel="stylesheet" href="{{ asset('css/themify-icons.css') }}">
     <!-- swiper carousel -->
@@ -73,10 +73,10 @@
                         <ul class="nav navbar-nav navbar-right alt-font text-normal">
                             @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">Вход</a>
+                                <a class="nav-link reactive" href="{{ route('login') }}">Вход</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">Регистрация</a>
+                                <a class="nav-link reactive" href="{{ route('register') }}">Регистрация</a>
                             </li>
                             @else
                                 <li class="dropdown simple-dropdown">
@@ -109,8 +109,7 @@
     </nav>
     <!-- end navigation -->
 </header>
-<section class="bg-extra-dark-gray full-height parallax md-position-relative no-padding"
-         style="visibility: visible; animation-name: fadeIn; background: none 50% 50%,linear-gradient(rgba(14, 33, 61, 0.77),rgba(18,191,203,0.69)) 50% 50%,radial-gradient(circle at 55% 84%,#2d9cc5,#2f33a4);">
+<section class="bg-extra-dark-gray full-height parallax md-position-relative no-padding bg-gradient">
     <div class="opacity-medium bg-extra-dark-gray display-none md-display-block"></div>
     <div class="container position-relative full-screen">
     <!--@yield('content')-->

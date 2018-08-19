@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\EducationalClass;
 use App\User;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -28,15 +29,7 @@ class HomeController extends Controller
         return view('home');
     }
 
-    private function classesBuilder(Request $request) {
-        $query = EducationalClass::with([
-            'teacher:id,name',
-        ])->withCount([
-            'students' => function ($query) {
-                $query->select('students_subscriptions.student_id')->where(['students_subscriptions.student_id' => auth()->id(), 'students_subscriptions.deleted_at' => null]);
-            }
-        ]);
-
+    private function addSkipLimit($query, Request $request) {
         if($request->skip) {
             $query = $query->skip($request->skip);
         } else {
@@ -49,6 +42,7 @@ class HomeController extends Controller
             $query = $query->limit(1000);
         }
 
+        /** @var Builder $query */
         return $query;
     }
 
@@ -60,8 +54,10 @@ class HomeController extends Controller
             ];
         }
 
+        $query = EducationalClass::getClassesWithActiveUser(auth()->id());
+
         return [
-            'classes' => $this->classesBuilder($request)
+            'classes' => $this->addSkipLimit($query, $request)
                 ->where('teacher_id', auth()->id())
                 ->get(),
         ];
@@ -75,10 +71,10 @@ class HomeController extends Controller
             ];
         }
 
+        $user = auth()->user();
+
         return [
-            'classes' => $this->classesBuilder($request)
-                ->where('teacher_id', auth()->id())
-                ->get(),
+            'classes' => $this->addSkipLimit($user->student_classes(), $request)->get()
         ];
     }
 
@@ -90,8 +86,10 @@ class HomeController extends Controller
             ];
         }
 
+        $query = EducationalClass::getClassesWithActiveUser(auth()->id());
+
         return [
-            'classes' => $this->classesBuilder($request)
+            'classes' => $this->addSkipLimit($query, $request)
                 ->get(),
         ];
     }

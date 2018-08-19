@@ -2,11 +2,15 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import HomeStudent from './pages/HomeStudent';
+import MyCourses from './pages/MyCourses';
+
 import HomeTeacher from './pages/HomeTeacher';
+
 import Profile from './pages/Profile';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import RegisterVerify from './pages/RegisterVerify';
+
 import Admin from './pages/Admin';
 import AdminUsers from './pages/AdminUsers';
 import AdminStats from './pages/AdminStats';
@@ -26,7 +30,16 @@ const routes = [
         component: HomeTeacher,
         meta: {
             roles: ['teacher'],
-            redirect: 'home',
+            redirect: 'studentCourses',
+        },
+    },
+    {
+        path: '/courses',
+        name: 'studentCourses',
+        component: MyCourses,
+        meta: {
+            roles: ['student'],
+            redirect: 'homeTeacher',
         },
     },
     {

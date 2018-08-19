@@ -21,7 +21,7 @@
     <!-- et line icon -->
     <link rel="stylesheet" href="{{ asset('css/et-line-icons.css') }}"/>
     <!-- font-awesome icon -->
-    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     <!-- themify icon -->
     <link rel="stylesheet" href="{{ asset('css/themify-icons.css') }}">
     <!-- swiper carousel -->

@@ -1,5 +1,10 @@
 <template>
     <div>
+        <modal @close="$refs.subscribeModal.hide()" ref="subscribeModal">
+            <template slot="header">
+                <h4 class="modal-title">Modal title</h4>
+            </template>
+        </modal>
         <section class="bg-white padding-65px-tb">
             <div class="container">
                 <div class="row">
@@ -11,7 +16,7 @@
                             <form>
                                 <div class="position-relative">
                                     <input type="text"
-                                           class="bg-transparent text-small no-margin border-color-extra-light-gray medium-input pull-left"
+                                           class="bg-transparent text-small no-margin border-color-gray medium-input pull-left"
                                            placeholder="Учитель или предмет">
                                     <button type="submit"
                                             class="bg-transparent  btn position-absolute right-0 top-1"><i
@@ -52,51 +57,91 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="margin-20px-bottom">
-                                        <div class="col-md-12 col-sm-12 col-xs-12 blog-post-content margin-30px-bottom xs-margin-30px-bottom xs-text-center" v-for="educationalClass in classes">
-                                            <div class="blog-text border-all display-inline-block width-100 padding-30px-all xs-padding-20px-all no-padding-bottom" :class="{'subscribed-course': educationalClass.students_count}">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <h6 class="font-weight-600 text-extra-dark-gray">{{ educationalClass.name }}</h6>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <img src="images/trushin.jpg" alt="" class="img margin-5px-bottom" style="width:100%">
-                                                        <p class="text-dark-gray font-weight-600 margin-15px-bottom">{{ educationalClass.teacher.name }}</p>
-                                                    </div>
-                                                    <div class="col-md-9">
-                                                        <div class="content">
-                                                            <div class="text-medium-gray text-extra-small margin-5px-bottom text-uppercase alt-font">
-                                                                <span>на сайте с</span> <span class="text-dark-blue">{{ educationalClass.created_at | moment("Do MMMM YYYY") }}</span>
-                                                                &nbsp&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-                                                                <span class="text-medium-gray">спец.</span> <span class="text-dark-blue">математика</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-                                                                <span class="text-success" v-if="educationalClass.max_places>1">групповые занятия</span>
-                                                                <span class="text-light-orange" v-else>репетиторство</span>
-                                                            </div>
-                                                            <p class="text-extra-dark-gray alt-font text-large font-weight-600 margin-15px-bottom display-block">{{ educationalClass.price }} ₽<small>/место</small></p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <p class="no-margin">Я готов отсосать вам хуй за несчастные 190 р, пожалуйста ну дайте уж их мне! Вы думаете мне что-то платят на этом ебучем webcrew? Да нихуя!!! Задержки по выплатам, это просто очередная финансовая пирамида, мавроди сука отдыхает! Да я любого в  <span class="label-success text-white">тру</span>ху порву</p>
-                                                    </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 blog-post-content margin-30px-bottom xs-margin-30px-bottom xs-text-center"
+                                             v-for="educationalClass in classes">
+                                            <div class="blog-text border-all display-inline-block width-100 padding-30px-all xs-padding-20px-all"
+                                                 :class="{'subscribed-course': educationalClass.students_count}">
+                                                <div class="course-header">
+                                                    <h6 class="font-weight-600 text-extra-dark-gray">
+                                                        {{ educationalClass.name }}</h6>
                                                 </div>
-                                                <div class="equalize xs-equalize-auto author border-top border-color-extra-light-gray display-table width-100">
-                                                    <div class="name col-md-4 col-sm-4 padding-15px-all" style="height: 60px;">
-                                                        <div class="display-table text-center width-100 height-100">
-                                                            <div class="display-table-cell vertical-align-middle">
-                                                                <span class="text-medium-gray text-extra-small alt-font padding-10px-left">Борис <span class="label-success text-white">Тру</span>шин</span>
+                                                <div class="course-content">
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                            <img src="images/trushin.jpg" alt=""
+                                                                 class="img margin-5px-bottom" style="width:100%">
+                                                            <p class="text-dark-gray font-weight-600 margin-15px-bottom">
+                                                                {{ educationalClass.teacher.name }}</p>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <div class="content">
+                                                                <div class="text-medium-gray text-extra-small margin-5px-bottom text-uppercase alt-font">
+                                                                    <span>на сайте с</span> <span
+                                                                        class="text-dark-blue">{{ educationalClass.created_at | moment("Do MMMM YYYY")
+                                                                    }}</span>
+                                                                    &nbsp&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                                                                    <span class="text-medium-gray">спец.</span> <span
+                                                                        class="text-dark-blue">математика</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                                                                    <span class="text-success"
+                                                                          v-if="educationalClass.max_places>1">групповые занятия</span>
+                                                                    <span class="text-light-orange"
+                                                                          v-else>репетиторство</span>
+                                                                </div>
+                                                                <p class="text-extra-dark-gray alt-font text-large font-weight-600 margin-15px-bottom display-block">
+                                                                    {{ educationalClass.price }} ₽
+                                                                    <small>/место</small>
+                                                                </p>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="name col-md-4 col-sm-4 border-lr padding-15px-all border-color-extra-light-gray xs-no-border" style="height: 60px;">
-                                                        <div class="display-table text-center  width-100 height-100">
-                                                            <div class="display-table-cell vertical-align-middle">
-                                                                <a href="#" class="text-extra-small alt-font text-medium-gray text-uppercase margin-lr-auto display-table"><i class="far fa-heart margin-5px-right text-small"></i>5 like(s)</a>
-                                                            </div>
+                                                        <div class="col-md-12">
+                                                            <p class="no-margin">
+                                                                {{educationalClass.teacher.promo_desc}}</p>
                                                         </div>
                                                     </div>
-                                                    <div class="name col-md-4 col-sm-4 padding-15px-all" style="height: 60px;">
-                                                        <div class="display-table text-center width-100 height-100">
-                                                            <div class="display-table-cell vertical-align-middle">
-                                                                <a href="#" class="text-extra-small alt-font text-medium-gray text-uppercase margin-lr-auto display-table"><i class="far fa-comment margin-5px-right text-small"></i>3 Comment(s)</a>
+                                                    <div class="equalize xs-equalize-auto author border-top border-color-extra-light-gray display-table width-100">
+                                                        <div class="name col-md-4 col-sm-4 padding-15px-all"
+                                                             style="height: 60px;">
+                                                            <div class="display-table text-center width-100 height-100">
+                                                                <div class="display-table-cell vertical-align-middle">
+                                                                    <span class="text-medium-gray text-extra-small alt-font padding-10px-left" v-for="tag in educationalClass.tags">
+                                                                       #{{ tag.name }}
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="name col-md-4 col-sm-4 border-lr padding-15px-all border-color-extra-light-gray xs-no-border"
+                                                             style="height: 60px;">
+                                                            <div class="display-table text-center  width-100 height-100">
+                                                                <div class="display-table-cell vertical-align-middle">
+                                                                    <p class="text-extra-small alt-font text-medium-gray text-uppercase no-margin-tb margin-lr-auto display-table">
+                                                                        рейтинг
+                                                                        <i class="fas fa-star margin-5px-right text-small rating-on"
+                                                                           v-for="index in educationalClass.rating"></i>
+                                                                        <i class="far fa-star margin-5px-right text-small rating-off"
+                                                                           v-for="index     in (5-educationalClass.rating)"></i></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="name col-md-4 col-sm-4 padding-15px-all"
+                                                             style="height: 60px;">
+                                                            <div class="display-table text-center width-100 height-100">
+                                                                <div class="display-table-cell vertical-align-middle">
+                                                                    <a class="text-extra-small alt-font text-medium-gray text-uppercase margin-lr-auto display-table"><i
+                                                                            class="far fa-comment margin-5px-right text-small"></i>3 Comment(s)</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <button class="btn btn-block btn-transparent-extra-medium-gray"
+                                                                        v-if="educationalClass.students_count">
+                                                                    расписание
+                                                                </button>
+                                                                <button class="btn btn-block btn-transparent-medium-gray"
+                                                                        v-if="!educationalClass.students_count"
+                                                                        @click="showSubscribe(educationalClass)">
+                                                                    подписаться
+                                                                </button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -136,10 +181,12 @@
 <script>
     import axios from 'axios'
     import InfiniteLoading from 'vue-infinite-loading'
+    import modal from '../components/Modal';
 
     export default {
         components: {
             InfiniteLoading,
+            modal,
         },
         data() {
             return {
@@ -150,6 +197,9 @@
             }
         },
         methods: {
+            showSubscribe(course) {
+                this.$refs.subscribeModal.show();
+            },
             update () {
                 this.mounted = false;
 
