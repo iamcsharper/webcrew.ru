@@ -48583,6 +48583,12 @@ exports.default = new _vuex.Store({
     }), _mutations),
 
     actions: {
+        setClasses: function setClasses(store, _ref) {
+            var classes = _ref.classes;
+
+            store.commit(types.GET_CLASSES.SUCCESS, classes);
+            return Promise.resolve(true);
+        },
         getClasses: function getClasses(store, params) {
             params.store = store;
             params.mutationTypes = types.GET_CLASSES;
@@ -54108,6 +54114,9 @@ exports.default = {
             sortables: [{ value: 'rating', text: 'Рейтинг' }, { value: 'created_at', text: 'Дата создания' }, { value: 'price', text: 'Цена' }, { value: 'max_places', text: 'Кол-во мест' }]
         };
     },
+    prefetch: function prefetch(store, context) {
+        store.dispatch('setClasses', context);
+    },
 
     computed: {
         user: function user() {
@@ -54228,7 +54237,8 @@ exports.default = {
         }
     },
     mounted: function mounted() {
-        this.update();
+        this.mounted = true;
+        //this.update();
     }
 };
 
@@ -54773,461 +54783,384 @@ var render = function() {
               },
               [
                 _c("transition", { attrs: { name: "fade" } }, [
-                  _vm.mounted
-                    ? _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-md-12" }, [
-                          _c(
-                            "div",
-                            { staticClass: "margin-20px-bottom" },
-                            [
-                              _vm._l(_vm.classes, function(educationalClass) {
-                                return _c(
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-md-12" }, [
+                      _c(
+                        "div",
+                        { staticClass: "margin-20px-bottom" },
+                        [
+                          _vm._l(_vm.classes, function(educationalClass) {
+                            return _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "col-md-12 col-sm-12 col-xs-12 blog-post-content margin-30px-bottom xs-margin-30px-bottom xs-text-center"
+                              },
+                              [
+                                _c(
                                   "div",
                                   {
                                     staticClass:
-                                      "col-md-12 col-sm-12 col-xs-12 blog-post-content margin-30px-bottom xs-margin-30px-bottom xs-text-center"
+                                      "blog-text border-all display-inline-block width-100 padding-30px-all xs-padding-20px-all no-padding-bottom",
+                                    class: {
+                                      "subscribed-course":
+                                        educationalClass.students_count
+                                    }
                                   },
                                   [
                                     _c(
                                       "div",
-                                      {
-                                        staticClass:
-                                          "blog-text border-all display-inline-block width-100 padding-30px-all xs-padding-20px-all no-padding-bottom",
-                                        class: {
-                                          "subscribed-course":
-                                            educationalClass.students_count
-                                        }
-                                      },
+                                      { staticClass: "course-header" },
                                       [
                                         _c(
-                                          "div",
-                                          { staticClass: "course-header" },
+                                          "h6",
+                                          {
+                                            staticClass:
+                                              "font-weight-600 text-extra-dark-gray"
+                                          },
                                           [
-                                            _c(
-                                              "h6",
-                                              {
-                                                staticClass:
-                                                  "font-weight-600 text-extra-dark-gray"
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "\n                                                        " +
-                                                    _vm._s(
-                                                      educationalClass.name
-                                                    )
-                                                )
-                                              ]
+                                            _vm._v(
+                                              "\n                                                        " +
+                                                _vm._s(educationalClass.name)
                                             )
                                           ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "div",
-                                          { staticClass: "course-content" },
-                                          [
-                                            _c("div", { staticClass: "row" }, [
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "course-content" },
+                                      [
+                                        _c("div", { staticClass: "row" }, [
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-md-3" },
+                                            [
+                                              _c("img", {
+                                                staticClass:
+                                                  "img margin-5px-bottom",
+                                                staticStyle: { width: "100%" },
+                                                attrs: {
+                                                  src: "images/trushin.jpg",
+                                                  alt: ""
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c(
+                                                "p",
+                                                {
+                                                  staticClass:
+                                                    "text-dark-gray text-medium font-weight-600 margin-15px-bottom"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                                                " +
+                                                      _vm._s(
+                                                        educationalClass.teacher
+                                                          .name
+                                                      )
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-md-9" },
+                                            [
                                               _c(
                                                 "div",
-                                                { staticClass: "col-md-3" },
+                                                { staticClass: "content" },
                                                 [
-                                                  _c("img", {
-                                                    staticClass:
-                                                      "img margin-5px-bottom",
-                                                    staticStyle: {
-                                                      width: "100%"
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "text-medium-gray text-extra-small margin-5px-bottom text-uppercase alt-font"
                                                     },
-                                                    attrs: {
-                                                      src: "images/trushin.jpg",
-                                                      alt: ""
-                                                    }
-                                                  }),
+                                                    [
+                                                      _c("span", [
+                                                        _vm._v("на сайте с")
+                                                      ]),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "span",
+                                                        {
+                                                          staticClass:
+                                                            "text-dark-blue"
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              _vm._f("moment")(
+                                                                educationalClass.created_at,
+                                                                "Do MMMM YYYY"
+                                                              )
+                                                            )
+                                                          )
+                                                        ]
+                                                      ),
+                                                      _vm._v(
+                                                        "\n                                                                       |   \n                                                                    "
+                                                      ),
+                                                      _c(
+                                                        "span",
+                                                        {
+                                                          staticClass:
+                                                            "text-medium-gray"
+                                                        },
+                                                        [_vm._v("спец.")]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "span",
+                                                        {
+                                                          staticClass:
+                                                            "text-dark-blue"
+                                                        },
+                                                        [_vm._v("математика")]
+                                                      ),
+                                                      _vm._v(
+                                                        "   |   \n                                                                    "
+                                                      ),
+                                                      educationalClass.max_places >
+                                                      1
+                                                        ? _c(
+                                                            "span",
+                                                            {
+                                                              staticClass:
+                                                                "text-success"
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                "групповые занятия"
+                                                              )
+                                                            ]
+                                                          )
+                                                        : _c(
+                                                            "span",
+                                                            {
+                                                              staticClass:
+                                                                "text-light-orange"
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                "репетиторство"
+                                                              )
+                                                            ]
+                                                          )
+                                                    ]
+                                                  ),
                                                   _vm._v(" "),
                                                   _c(
                                                     "p",
                                                     {
                                                       staticClass:
-                                                        "text-dark-gray text-medium font-weight-600 margin-15px-bottom"
+                                                        "text-extra-dark-gray alt-font text-large font-weight-600 no-margin-bottom display-block"
                                                     },
                                                     [
                                                       _vm._v(
-                                                        "\n                                                                " +
+                                                        "\n                                                                    " +
                                                           _vm._s(
-                                                            educationalClass
-                                                              .teacher.name
-                                                          )
-                                                      )
-                                                    ]
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "div",
-                                                { staticClass: "col-md-9" },
-                                                [
-                                                  _c(
-                                                    "div",
-                                                    { staticClass: "content" },
-                                                    [
-                                                      _c(
-                                                        "div",
-                                                        {
-                                                          staticClass:
-                                                            "text-medium-gray text-extra-small margin-5px-bottom text-uppercase alt-font"
-                                                        },
-                                                        [
-                                                          _c("span", [
-                                                            _vm._v("на сайте с")
-                                                          ]),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "span",
-                                                            {
-                                                              staticClass:
-                                                                "text-dark-blue"
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                _vm._s(
-                                                                  _vm._f(
-                                                                    "moment"
-                                                                  )(
-                                                                    educationalClass.created_at,
-                                                                    "Do MMMM YYYY"
-                                                                  )
-                                                                )
-                                                              )
-                                                            ]
-                                                          ),
-                                                          _vm._v(
-                                                            "\n                                                                       |   \n                                                                    "
-                                                          ),
-                                                          _c(
-                                                            "span",
-                                                            {
-                                                              staticClass:
-                                                                "text-medium-gray"
-                                                            },
-                                                            [_vm._v("спец.")]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "span",
-                                                            {
-                                                              staticClass:
-                                                                "text-dark-blue"
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                "математика"
-                                                              )
-                                                            ]
-                                                          ),
-                                                          _vm._v(
-                                                            "   |   \n                                                                    "
-                                                          ),
-                                                          educationalClass.max_places >
-                                                          1
-                                                            ? _c(
-                                                                "span",
-                                                                {
-                                                                  staticClass:
-                                                                    "text-success"
-                                                                },
-                                                                [
-                                                                  _vm._v(
-                                                                    "групповые занятия"
-                                                                  )
-                                                                ]
-                                                              )
-                                                            : _c(
-                                                                "span",
-                                                                {
-                                                                  staticClass:
-                                                                    "text-light-orange"
-                                                                },
-                                                                [
-                                                                  _vm._v(
-                                                                    "репетиторство"
-                                                                  )
-                                                                ]
-                                                              )
-                                                        ]
+                                                            educationalClass.price
+                                                          ) +
+                                                          " ₽\n\n\n                                                                    "
                                                       ),
-                                                      _vm._v(" "),
-                                                      _c(
+                                                      _c("small", [
+                                                        _vm._v("/место")
+                                                      ])
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  educationalClass.max_places >
+                                                  1
+                                                    ? _c(
                                                         "p",
                                                         {
                                                           staticClass:
-                                                            "text-extra-dark-gray alt-font text-large font-weight-600 no-margin-bottom display-block"
+                                                            "text-extra-dark-gray alt-font text-medium font-weight-400 no-margin-bottom display-block"
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            "\n                                                                    Осталось свободных мест:\n                                                                "
+                                                          )
+                                                        ]
+                                                      )
+                                                    : _vm._e(),
+                                                  _vm._v(" "),
+                                                  educationalClass.max_places >
+                                                  1
+                                                    ? _c(
+                                                        "p",
+                                                        {
+                                                          staticClass:
+                                                            "text-extra-dark-gray alt-font text-medium margin-15px-bottom font-weight-600"
                                                         },
                                                         [
                                                           _vm._v(
                                                             "\n                                                                    " +
                                                               _vm._s(
-                                                                educationalClass.price
+                                                                educationalClass.max_places -
+                                                                  educationalClass
+                                                                    .students
+                                                                    .length
                                                               ) +
-                                                              " ₽\n\n\n                                                                    "
-                                                          ),
-                                                          _c("small", [
-                                                            _vm._v("/место")
-                                                          ])
+                                                              " / " +
+                                                              _vm._s(
+                                                                educationalClass.max_places
+                                                              )
+                                                          )
                                                         ]
-                                                      ),
-                                                      _vm._v(" "),
-                                                      educationalClass.max_places >
-                                                      1
-                                                        ? _c(
-                                                            "p",
-                                                            {
-                                                              staticClass:
-                                                                "text-extra-dark-gray alt-font text-medium font-weight-400 no-margin-bottom display-block"
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                "\n                                                                    Осталось свободных мест:\n                                                                "
-                                                              )
-                                                            ]
-                                                          )
-                                                        : _vm._e(),
-                                                      _vm._v(" "),
-                                                      educationalClass.max_places >
-                                                      1
-                                                        ? _c(
-                                                            "p",
-                                                            {
-                                                              staticClass:
-                                                                "text-extra-dark-gray alt-font text-medium margin-15px-bottom font-weight-600"
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                "\n                                                                    " +
-                                                                  _vm._s(
-                                                                    educationalClass.max_places -
-                                                                      educationalClass
-                                                                        .students
-                                                                        .length
-                                                                  ) +
-                                                                  " / " +
-                                                                  _vm._s(
-                                                                    educationalClass.max_places
-                                                                  )
-                                                              )
-                                                            ]
-                                                          )
-                                                        : _c(
-                                                            "p",
-                                                            {
-                                                              staticClass:
-                                                                "text-extra-dark-gray alt-font text-medium font-weight-400 margin-15px-bottom display-block"
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                "\n                                                                    Репетитор свободен.\n                                                                "
-                                                              )
-                                                            ]
-                                                          )
-                                                    ]
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "div",
-                                                { staticClass: "col-md-12" },
-                                                [
-                                                  _c(
-                                                    "p",
-                                                    {
-                                                      staticClass: "no-margin"
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        "\n                                                                " +
-                                                          _vm._s(
-                                                            educationalClass
-                                                              .teacher
-                                                              .promo_desc
-                                                          )
                                                       )
-                                                    ]
+                                                    : _c(
+                                                        "p",
+                                                        {
+                                                          staticClass:
+                                                            "text-extra-dark-gray alt-font text-medium font-weight-400 margin-15px-bottom display-block"
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            "\n                                                                    Репетитор свободен.\n                                                                "
+                                                          )
+                                                        ]
+                                                      )
+                                                ]
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-md-12" },
+                                            [
+                                              _c(
+                                                "p",
+                                                { staticClass: "no-margin" },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                                                " +
+                                                      _vm._s(
+                                                        educationalClass.teacher
+                                                          .promo_desc
+                                                      )
                                                   )
                                                 ]
                                               )
-                                            ]),
-                                            _vm._v(" "),
+                                            ]
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "equalize xs-equalize-auto author border-top border-color-extra-light-gray display-table width-100"
+                                          },
+                                          [
                                             _c(
                                               "div",
                                               {
                                                 staticClass:
-                                                  "equalize xs-equalize-auto author border-top border-color-extra-light-gray display-table width-100"
+                                                  "name col-md-4 col-sm-4 padding-15px-all",
+                                                staticStyle: { height: "60px" }
                                               },
                                               [
                                                 _c(
                                                   "div",
                                                   {
                                                     staticClass:
-                                                      "name col-md-4 col-sm-4 padding-15px-all",
-                                                    staticStyle: {
-                                                      height: "60px"
-                                                    }
+                                                      "display-table text-center width-100 height-100"
                                                   },
                                                   [
                                                     _c(
                                                       "div",
                                                       {
                                                         staticClass:
-                                                          "display-table text-center width-100 height-100"
+                                                          "display-table-cell vertical-align-middle"
                                                       },
-                                                      [
-                                                        _c(
-                                                          "div",
-                                                          {
-                                                            staticClass:
-                                                              "display-table-cell vertical-align-middle"
-                                                          },
-                                                          _vm._l(
-                                                            educationalClass.tags,
-                                                            function(tag) {
-                                                              return _c(
-                                                                "span",
-                                                                {
-                                                                  staticClass:
-                                                                    "text-medium-gray text-extra-small alt-font padding-10px-left"
-                                                                },
-                                                                [
-                                                                  _vm._v(
-                                                                    "\n                                                                       #" +
-                                                                      _vm._s(
-                                                                        tag.name
-                                                                      ) +
-                                                                      "\n                                                                    "
-                                                                  )
-                                                                ]
+                                                      _vm._l(
+                                                        educationalClass.tags,
+                                                        function(tag) {
+                                                          return _c(
+                                                            "span",
+                                                            {
+                                                              staticClass:
+                                                                "text-medium-gray text-extra-small alt-font padding-10px-left"
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                "\n                                                                       #" +
+                                                                  _vm._s(
+                                                                    tag.name
+                                                                  ) +
+                                                                  "\n                                                                    "
                                                               )
-                                                            }
+                                                            ]
                                                           )
-                                                        )
-                                                      ]
+                                                        }
+                                                      )
                                                     )
                                                   ]
-                                                ),
-                                                _vm._v(" "),
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "name col-md-4 col-sm-4 padding-15px-all border-color-extra-light-gray xs-no-border",
+                                                staticStyle: { height: "60px" }
+                                              },
+                                              [
                                                 _c(
                                                   "div",
                                                   {
                                                     staticClass:
-                                                      "name col-md-4 col-sm-4 padding-15px-all border-color-extra-light-gray xs-no-border",
-                                                    staticStyle: {
-                                                      height: "60px"
-                                                    }
+                                                      "display-table text-center  width-100 height-100"
                                                   },
                                                   [
                                                     _c(
                                                       "div",
                                                       {
                                                         staticClass:
-                                                          "display-table text-center  width-100 height-100"
+                                                          "display-table-cell vertical-align-middle"
                                                       },
                                                       [
                                                         _c(
-                                                          "div",
+                                                          "p",
                                                           {
                                                             staticClass:
-                                                              "display-table-cell vertical-align-middle"
+                                                              "text-extra-small alt-font text-medium-gray text-uppercase no-margin-tb margin-lr-auto display-table"
                                                           },
                                                           [
-                                                            _c(
-                                                              "p",
-                                                              {
-                                                                staticClass:
-                                                                  "text-extra-small alt-font text-medium-gray text-uppercase no-margin-tb margin-lr-auto display-table"
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  "\n                                                                        рейтинг\n                                                                        "
-                                                                ),
-                                                                _vm._l(
-                                                                  educationalClass.rating,
-                                                                  function(
-                                                                    index
-                                                                  ) {
-                                                                    return _c(
-                                                                      "i",
-                                                                      {
-                                                                        staticClass:
-                                                                          "fas fa-star margin-5px-right text-small rating-on"
-                                                                      }
-                                                                    )
-                                                                  }
-                                                                ),
-                                                                _vm._v(" "),
-                                                                _vm._l(
-                                                                  5 -
-                                                                    educationalClass.rating,
-                                                                  function(
-                                                                    index
-                                                                  ) {
-                                                                    return _c(
-                                                                      "i",
-                                                                      {
-                                                                        staticClass:
-                                                                          "far fa-star margin-5px-right text-small rating-off"
-                                                                      }
-                                                                    )
-                                                                  }
-                                                                )
-                                                              ],
-                                                              2
-                                                            )
-                                                          ]
-                                                        )
-                                                      ]
-                                                    )
-                                                  ]
-                                                ),
-                                                _vm._v(" "),
-                                                _c(
-                                                  "div",
-                                                  {
-                                                    staticClass:
-                                                      "name col-md-4 col-sm-4 padding-15px-all",
-                                                    staticStyle: {
-                                                      height: "60px"
-                                                    }
-                                                  },
-                                                  [
-                                                    _c(
-                                                      "div",
-                                                      {
-                                                        staticClass:
-                                                          "display-table text-center width-100 height-100"
-                                                      },
-                                                      [
-                                                        _c(
-                                                          "div",
-                                                          {
-                                                            staticClass:
-                                                              "display-table-cell vertical-align-middle"
-                                                          },
-                                                          [
-                                                            _c(
-                                                              "a",
-                                                              {
-                                                                staticClass:
-                                                                  "text-extra-small alt-font text-medium-gray text-uppercase margin-lr-auto display-table"
-                                                              },
-                                                              [
-                                                                _c("i", {
+                                                            _vm._v(
+                                                              "\n                                                                        рейтинг\n                                                                        "
+                                                            ),
+                                                            _vm._l(
+                                                              educationalClass.rating,
+                                                              function(index) {
+                                                                return _c("i", {
                                                                   staticClass:
-                                                                    "far fa-comment margin-5px-right text-small"
-                                                                }),
-                                                                _vm._v(
-                                                                  "3 Comment(s)"
-                                                                )
-                                                              ]
+                                                                    "fas fa-star margin-5px-right text-small rating-on"
+                                                                })
+                                                              }
+                                                            ),
+                                                            _vm._v(" "),
+                                                            _vm._l(
+                                                              5 -
+                                                                educationalClass.rating,
+                                                              function(index) {
+                                                                return _c("i", {
+                                                                  staticClass:
+                                                                    "far fa-star margin-5px-right text-small rating-off"
+                                                                })
+                                                              }
                                                             )
-                                                          ]
+                                                          ],
+                                                          2
                                                         )
                                                       ]
                                                     )
@@ -55236,74 +55169,118 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(" "),
-                                            ["student", "admin"].includes(
-                                              _vm.role
-                                            )
-                                              ? _c(
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "name col-md-4 col-sm-4 padding-15px-all",
+                                                staticStyle: { height: "60px" }
+                                              },
+                                              [
+                                                _c(
                                                   "div",
                                                   {
                                                     staticClass:
-                                                      "row margin-30px-bottom xs-margin-5px-bottom"
+                                                      "display-table text-center width-100 height-100"
                                                   },
                                                   [
                                                     _c(
                                                       "div",
                                                       {
-                                                        staticClass: "col-md-12"
+                                                        staticClass:
+                                                          "display-table-cell vertical-align-middle"
                                                       },
                                                       [
-                                                        educationalClass.students_count
-                                                          ? _c(
-                                                              "button",
-                                                              {
-                                                                staticClass:
-                                                                  "btn btn-block btn-transparent-extra-medium-gray"
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  "\n                                                                расписание\n\n                                                            "
-                                                                )
-                                                              ]
+                                                        _c(
+                                                          "a",
+                                                          {
+                                                            staticClass:
+                                                              "text-extra-small alt-font text-medium-gray text-uppercase margin-lr-auto display-table"
+                                                          },
+                                                          [
+                                                            _c("i", {
+                                                              staticClass:
+                                                                "far fa-comment margin-5px-right text-small"
+                                                            }),
+                                                            _vm._v(
+                                                              "3 Comment(s)"
                                                             )
-                                                          : _vm._e(),
-                                                        _vm._v(" "),
-                                                        !educationalClass.students_count
-                                                          ? _c(
-                                                              "button",
-                                                              {
-                                                                staticClass:
-                                                                  "btn btn-block btn-transparent-medium-gray",
-                                                                on: {
-                                                                  click: function(
-                                                                    $event
-                                                                  ) {
-                                                                    _vm.showSubscribe(
-                                                                      educationalClass
-                                                                    )
-                                                                  }
-                                                                }
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  "\n                                                                подписаться\n\n                                                            "
-                                                                )
-                                                              ]
-                                                            )
-                                                          : _vm._e()
+                                                          ]
+                                                        )
                                                       ]
                                                     )
                                                   ]
                                                 )
-                                              : _vm._e()
+                                              ]
+                                            )
                                           ]
-                                        )
+                                        ),
+                                        _vm._v(" "),
+                                        ["student", "admin"].includes(_vm.role)
+                                          ? _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "row margin-30px-bottom xs-margin-5px-bottom"
+                                              },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "col-md-12" },
+                                                  [
+                                                    educationalClass.students_count
+                                                      ? _c(
+                                                          "button",
+                                                          {
+                                                            staticClass:
+                                                              "btn btn-block btn-transparent-extra-medium-gray"
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "\n                                                                расписание\n\n                                                            "
+                                                            )
+                                                          ]
+                                                        )
+                                                      : _vm._e(),
+                                                    _vm._v(" "),
+                                                    !educationalClass.students_count
+                                                      ? _c(
+                                                          "button",
+                                                          {
+                                                            staticClass:
+                                                              "btn btn-block btn-transparent-medium-gray",
+                                                            on: {
+                                                              click: function(
+                                                                $event
+                                                              ) {
+                                                                _vm.showSubscribe(
+                                                                  educationalClass
+                                                                )
+                                                              }
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "\n                                                                подписаться\n\n                                                            "
+                                                            )
+                                                          ]
+                                                        )
+                                                      : _vm._e()
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e()
                                       ]
                                     )
                                   ]
                                 )
-                              }),
-                              _vm._v(" "),
-                              _c(
+                              ]
+                            )
+                          }),
+                          _vm._v(" "),
+                          _vm.mounted
+                            ? _c(
                                 "infinite-loading",
                                 {
                                   ref: "infiniteLoading",
@@ -55338,47 +55315,47 @@ var render = function() {
                                   )
                                 ]
                               )
-                            ],
-                            2
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-md-12" }, [
-                          _c(
-                            "button",
+                            : _vm._e()
+                        ],
+                        2
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-12" }, [
+                      _c(
+                        "button",
+                        {
+                          directives: [
                             {
-                              directives: [
-                                {
-                                  name: "show",
-                                  rawName: "v-show",
-                                  value: _vm.distance < 0,
-                                  expression: "distance < 0"
-                                }
-                              ],
-                              staticClass: "btn btn-block btn-large btn-black",
-                              on: { click: _vm.manualLoad }
-                            },
-                            [
-                              !_vm.busy
-                                ? _c("span", [
-                                    _vm._v(
-                                      "\n                            Загрузить ещё\n                            "
-                                    )
-                                  ])
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _vm.busy
-                                ? _c("span", [
-                                    _vm._v(
-                                      "\n                            ...\n                            "
-                                    )
-                                  ])
-                                : _vm._e()
-                            ]
-                          )
-                        ])
-                      ])
-                    : _vm._e()
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.distance < 0,
+                              expression: "distance < 0"
+                            }
+                          ],
+                          staticClass: "btn btn-block btn-large btn-black",
+                          on: { click: _vm.manualLoad }
+                        },
+                        [
+                          !_vm.busy
+                            ? _c("span", [
+                                _vm._v(
+                                  "\n                            Загрузить ещё\n                            "
+                                )
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.busy
+                            ? _c("span", [
+                                _vm._v(
+                                  "\n                            ...\n                            "
+                                )
+                              ])
+                            : _vm._e()
+                        ]
+                      )
+                    ])
+                  ])
                 ])
               ],
               1
@@ -55692,16 +55669,9 @@ exports.default = {
         InfiniteLoading: _vueInfiniteLoading2.default,
         pageLoader: _Pageloader2.default
     },
-    //        async asyncData({store, route}) {
-    //            console.log('asyncdata...');
-    //
-    //            return await store.dispatch('getMyClasses', {
-    //                query: {
-    //                    skip: 0,
-    //                    limit: 2,
-    //                },
-    //            });
-    //        },
+    prefetch: function prefetch(store, context) {
+        store.dispatch('setClasses', context);
+    },
     data: function data() {
         return {
             busy: false,
@@ -55752,8 +55722,6 @@ exports.default = {
 
                 $state.loaded();
 
-                console.log(classes);
-
                 if (!classes.length) {
                     $state.complete();
                 }
@@ -55774,8 +55742,9 @@ exports.default = {
             }, 2000);
         }
     },
-    created: function created() {
-        this.update();
+    mounted: function mounted() {
+        this.mounted = true;
+        //this.update();
     }
 };
 
@@ -90363,13 +90332,34 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 __webpack_require__(283);
 
 var _createApp = (0, _app2.default)(window.Laravel.user),
-    app = _createApp.app;
+    app = _createApp.app,
+    router = _createApp.router,
+    store = _createApp.store;
 
-window.Vue = app;
+new Promise(function (resolve, reject) {
+    router.onReady(function () {
+        var matchedComponents = router.getMatchedComponents();
+        if (!matchedComponents.length) {
+            return reject({ code: 404 });
+        }
 
-app.$store.commit('setUser', window.Laravel.user);
+        matchedComponents.map(function (Component) {
+            if (Component.prefetch) {
+                Component.prefetch(store, window.Laravel.context);
+            }
+        });
 
-app.$mount('#app');
+        resolve(app);
+    }, reject);
+}).then(function (app) {
+    window.Vue = app;
+
+    app.$store.commit('setUser', window.Laravel.user);
+
+    app.$mount('#app');
+}).catch(function (err) {
+    console.error(err);
+});
 
 /***/ }),
 /* 283 */

@@ -63,7 +63,7 @@
                     </aside>
                     <main class="col-md-9 col-sm-12 col-xs-12 left-sidebar pull-right sm-margin-60px-bottom xs-margin-40px-bottom no-padding" style="min-height:300px">
                         <transition name="fade">
-                            <div class="row" v-if="mounted">
+                            <div class="row">
                                 <div class="col-md-12">
                                     <div class="margin-20px-bottom">
                                         <div class="col-md-12 col-sm-12 col-xs-12 blog-post-content margin-30px-bottom xs-margin-30px-bottom xs-text-center"
@@ -176,7 +176,7 @@
                                             </div>
                                         </div>
                                         <infinite-loading @infinite="append" spinner="waveDots"
-                                                          ref="infiniteLoading">
+                                                          ref="infiniteLoading" v-if="mounted">
                                     <span slot="no-more">
                                       Больше никого нет :(
                                     </span>
@@ -236,6 +236,9 @@
                     {value: 'max_places', text: 'Кол-во мест'},
                 ]
             }
+        },
+        prefetch(store, context) {
+            store.dispatch('setClasses', context);
         },
         computed: {
             user() {
@@ -345,7 +348,8 @@
             },
         },
         mounted() {
-			this.update();
+            this.mounted = true;
+			//this.update();
         },
     }
 </script>

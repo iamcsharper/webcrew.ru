@@ -2,10 +2,32 @@ require('./bootstrap');
 
 import createApp from './app';
 
-const { app } = createApp(window.Laravel.user);
+const {app, router, store} = createApp(window.Laravel.user);
 
-window.Vue = app;
+new Promise((resolve, reject) => {
+    router.onReady(() => {
+        const matchedComponents = router.getMatchedComponents();
+        if (!matchedComponents.length) {
+            return reject({code: 404});
+        }
 
-app.$store.commit('setUser', window.Laravel.user);
+        matchedComponents.map(Component => {
+            if (Component.prefetch) {
+                Component.prefetch(store, window.Laravel.context);
+            }
+        });
 
-app.$mount('#app');
+        resolve(app)
+
+    }, reject)
+})
+    .then(app => {
+        window.Vue = app;
+
+        app.$store.commit('setUser', window.Laravel.user);
+
+        app.$mount('#app');
+    })
+    .catch((err) => {
+        console.error(err);
+    });

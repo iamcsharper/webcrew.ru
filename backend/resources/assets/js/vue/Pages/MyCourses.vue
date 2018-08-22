@@ -67,16 +67,9 @@
             InfiniteLoading,
             pageLoader
         },
-//        async asyncData({store, route}) {
-//            console.log('asyncdata...');
-//
-//            return await store.dispatch('getMyClasses', {
-//                query: {
-//                    skip: 0,
-//                    limit: 2,
-//                },
-//            });
-//        },
+        prefetch(store, context) {
+            store.dispatch('setClasses', context);
+        },
         data() {
             return {
                 busy: false,
@@ -124,8 +117,6 @@
 
                         $state.loaded();
 
-                        console.log(classes);
-
                         if (!classes.length) {
                             $state.complete();
                         }
@@ -144,8 +135,9 @@
                 }, 2000);
             },
         },
-        created() {
-            this.update();
+        mounted() {
+            this.mounted = true;
+            //this.update();
         },
     }
 </script>

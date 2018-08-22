@@ -30,7 +30,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home/{vue_capture?}', 'HomeController@listClasses')->name('home')->where('vue_capture', '[\/\w\.-]*');
-Route::get('/courses/{vue_capture?}', 'HomeController@listClasses')->name('courses')->where('vue_capture', '[\/\w\.-]*');
+Route::get('/courses/{vue_capture?}', 'HomeController@myCourses')->name('courses')->where('vue_capture', '[\/\w\.-]*');
 
 Route::get('/api/home.getClasses', 'HomeController@apiClasses');
 // As teacher

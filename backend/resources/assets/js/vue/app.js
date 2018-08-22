@@ -20,6 +20,8 @@ Vue.use(VModal, {
 
 sync(store, router);
 
+
+
 export default function createApp(user) {
     store.commit('setUser', user);
 

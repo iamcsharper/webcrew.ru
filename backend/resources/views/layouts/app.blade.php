@@ -21,7 +21,8 @@
     <!-- et line icon -->
     <link rel="stylesheet" href="{{ asset('css/et-line-icons.css') }}"/>
     <!-- font-awesome icon -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+          integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     <!-- themify icon -->
     <link rel="stylesheet" href="{{ asset('css/themify-icons.css') }}">
     <!-- swiper carousel -->
@@ -41,7 +42,8 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}"/>
     <!-- responsive css -->
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}"/>
-    <!--[if IE]><script src="{{ asset('js/html5shiv.js') }}"></script><![endif]-->
+    <!--[if IE]>
+    <script src="{{ asset('js/html5shiv.js') }}"></script><![endif]-->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
@@ -54,8 +56,8 @@
                 <!-- start logo -->
                 <div class="col-lg-2 col-md-2 col-xs-5">
                     <a title="WebCrew" class="logo"><img src="{{ asset('images/logo.png') }}"
-                                                                  data-rjs="images/logo@2x.png" class="logo-dark"
-                                                                  alt="Pofo"><img
+                                                         data-rjs="images/logo@2x.png" class="logo-dark"
+                                                         alt="Pofo"><img
                                 src="{{ asset('images/logo-white.png') }}" data-rjs="images/logo-white@2x.png"
                                 alt="Pofo" class="logo-light default"></a>
                 </div>
@@ -72,14 +74,18 @@
                         <ul class="nav navbar-nav navbar-right alt-font text-normal">
                             @role('student')
                             <li class="nav-item"><a href="{{route('home')}}" class="inner-link reactive">Поиск</a></li>
-                            <li class="nav-item"><a href="{{ route('courses') }}" class="inner-link reactive">Мои подиски</a></li>
+                            <li class="nav-item"><a href="{{ route('courses') }}" class="inner-link reactive">Мои
+                                    подиски</a></li>
                             @endrole
                             @role('teacher')
-                            <li class="nav-item"><a href="{{route('home')}}" class="inner-link reactive">Список учителей</a></li>
-                            <li class="nav-item"><a href="{{route('courses')}}" class="inner-link reactive">Мои курсы</a></li>
+                            <li class="nav-item"><a href="{{route('home')}}" class="inner-link reactive">Список
+                                    учителей</a></li>
+                            <li class="nav-item"><a href="{{route('courses')}}" class="inner-link reactive">Мои
+                                    курсы</a></li>
                             @endrole
                             @role('admin')
-                            <li class="nav-item "><a href="{{route('home')}}" class="inner-link reactive">Список учителей</a></li>
+                            <li class="nav-item "><a href="{{route('home')}}" class="inner-link reactive">Список
+                                    учителей</a></li>
                             {{--<li class="nav-item"><a href="" class="inner-link reactive">Случ. стрим</a></li>--}}
                             @endrole
                             @guest
@@ -91,7 +97,8 @@
                             </li>
                             @else
                                 <li class="dropdown simple-dropdown nav-item">
-                                    <a href="javascript:void(0);" v-pre="">{{ Auth::user()->name }} (<span class="money">{{ Auth::user()->money }}</span> руб.)</a>
+                                    <a href="javascript:void(0);" v-pre="">{{ Auth::user()->name }} (<span
+                                                class="money">{{ Auth::user()->money }}</span> руб.)</a>
                                     <i class="fas fa-angle-down dropdown-toggle" data-toggle="dropdown"
                                        aria-hidden="true"></i>
                                     <!-- start sub menu -->
@@ -137,18 +144,20 @@
                     <span class="display-block margin-10px-top text-extra-small alt-font text-uppercase text-light-gray margin-15px-bottom">на крупнейший образовательный проект</span>
                     <!-- end sub title -->
                     <a href="https://player.vimeo.com/video/75976293"
-                       class="popup-vimeo btn btn-block btn-transparent-white width-60" style="margin-left: auto;margin-right: auto;">обучающее видео</a>
+                       class="popup-vimeo btn btn-block btn-transparent-white width-60"
+                       style="margin-left: auto;margin-right: auto;">обучающее видео</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<noscript><h4 class="text-center margin-30px-tb">Для корректной работы сайта у Вас должен быть включен javascript.</h4></noscript>
+<noscript><h4 class="text-center margin-30px-tb">Для корректной работы сайта у Вас должен быть включен javascript.</h4>
+</noscript>
 {!! ssr('js/vue/entry-server.js')
-        ->context([
+        ->context(array_merge([
             'user' => auth()->user(),
-        ])
+        ], (isset($params)) ? $params : []))
         ->fallback('<div id="app"></div>')
         ->render() !!}
 <!-- end footer -->
@@ -157,15 +166,11 @@
 <!-- end scroll to top  -->
 <!-- javascript libraries -->
 <script>
-    window.Laravel = @json([
-            'csrfToken' => csrf_token(),
-            'user' => auth()->user(),
-            'baseUrl' => URL::to('/')
-        ]);
-    @yield('script')
+    window.Laravel = <?php echo json_encode([ 'csrfToken' => csrf_token(), 'user' => auth()->user(), "context" => (isset($params)) ? $params : [], 'baseUrl' => URL::to('/'), ]); ?>
+
 </script>
 
-<script src="{{ mix('js/vue/entry-client.js') }}"></script>
+<script src="{{ asset('js/vue/entry-client.js') }}"></script>
 
 @yield('libs')
 <script type="text/javascript" src="{{ asset('js/blob.js') }}"></script>
@@ -215,4 +220,3 @@
 @yield('js')
 </body>
 </html>
-

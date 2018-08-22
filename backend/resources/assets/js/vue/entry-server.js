@@ -13,18 +13,14 @@ new Promise((resolve, reject) => {
             return reject({ code: 404 });
         }
 
-        Promise.all(matchedComponents.map(Component => {
-            if (Component.asyncData) {
-                return Component.asyncData({
-                    store,
-                    route: router.currentRoute
-                });
+        matchedComponents.map(Component => {
+            if (Component.prefetch) {
+                Component.prefetch(store, context);
             }
-        })).then(() => {
-            context.state = store.state;
+        });
 
-            resolve(app)
-        }).catch(reject);
+        resolve(app)
+
     }, reject);
 })
     .then(app => {

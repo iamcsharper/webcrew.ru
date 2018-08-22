@@ -7,13 +7,10 @@ use App\User;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Helpers\ServerSideRenderHelper as SSRH;
 
 
 class HomeController extends Controller
 {
-    use SSRH;
-
     /**
      * Create a new controller instance.
      *
@@ -32,7 +29,21 @@ class HomeController extends Controller
      */
     public function listClasses(Request $request)
     {
-        return view('home');
+        return view('home', [
+            'params' => $this->apiClasses($request)
+        ]);
+    }
+
+    public function myCourses(Request $request)
+    {
+        if (Auth::user()->roles->toArray()[0]['name'] === 'teacher')
+            return view('home', [
+                'params' => $this->apiMyJobClasses($request)
+            ]);
+
+        return view('home', [
+            'params' => $this->apiMyClasses($request)
+        ]);
     }
 
     private function addExtras($query, Request $request)

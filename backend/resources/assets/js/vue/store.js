@@ -42,6 +42,11 @@ export default new Store({
     },
 
     actions: {
+        setClasses(store, {classes}) {
+            store.commit(types.GET_CLASSES.SUCCESS, classes);
+            return Promise.resolve(true);
+        },
+
         getClasses(store, params) {
             params.store = store;
             params.mutationTypes = types.GET_CLASSES;
