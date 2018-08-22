@@ -53,51 +53,69 @@
                 </div>
             </div>
         </section>
+        <transition name="fade">
+            <page-loader v-if="!mounted"></page-loader>
+        </transition>
     </div>
 </template>
 <script>
-    import axios from 'axios'
     import InfiniteLoading from 'vue-infinite-loading'
+    import pageLoader from '../components/Pageloader'
 
     export default {
         components: {
-            InfiniteLoading,
+            InfiniteLoading, pageLoader
         },
         data() {
             return {
-                classes: [],
                 busy: false,
                 mounted: false,
                 distance: -Infinity,
             }
         },
+        computed: {
+            user() {
+                return this.$store.getters.user;
+            },
+            classes() {
+                return this.$store.state.getClassesData;
+            }
+        },
         methods: {
             update () {
                 this.mounted = false;
-
                 this.busy = true;
-                axios.get('/api/home.getMyJobClasses/0/9').then((response) => {
-                    this.classes = response.data.classes;
-                    this.busy = false;
 
-                    this.mounted = true;
-                });
+                this.$store.dispatch('getMyJobClasses', {
+                    query: {
+                        skip: 0,
+                        limit: 2,
+                    },
+                })
+                    .then(() => {
+                        this.busy = false;
+                        this.mounted = true;
+                    });
             },
             append ($state) {
                 this.busy = true;
 
-                let url = `/api/home.getMyJobClasses/${this.classes.length}/3`;
+                this.$store.dispatch('getMyJobClasses', {
+                    query: {
+                        skip: this.classes.length,
+                        take: 3,
+                    },
+                    concat: true,
+                })
+                    .then((classes) => {
+                        this.busy = false;
 
-                axios.get(url).then((response) => {
-                    this.busy = false;
-                    $state.loaded();
+                        $state.loaded();
 
-                    if (response.data.classes.length) {
-                        this.classes = response.data.classes.concat(this.classes);
-                    } else {
-                        $state.complete();
-                    }
-                });
+                        if (!classes.length) {
+                            $state.complete();
+                        }
+                    });
             },
             manualLoad(event) {
                 event.target.blur();
@@ -112,7 +130,7 @@
                 }, 2000);
             },
         },
-        created() {
+        mounted() {
             this.update();
         },
     }

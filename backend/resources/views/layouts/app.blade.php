@@ -38,6 +38,7 @@
     <link rel="stylesheet" href="{{ asset('css/bootsnav.css') }}">
     <!-- style -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}"/>
     <!-- responsive css -->
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}"/>
     <!--[if IE]><script src="{{ asset('js/html5shiv.js') }}"></script><![endif]-->
@@ -90,7 +91,7 @@
                             </li>
                             @else
                                 <li class="dropdown simple-dropdown nav-item">
-                                    <a href="javascript:void(0);" v-pre="">{{ Auth::user()->name }}</a>
+                                    <a href="javascript:void(0);" v-pre="">{{ Auth::user()->name }} (<span class="money">{{ Auth::user()->money }}</span> руб.)</a>
                                     <i class="fas fa-angle-down dropdown-toggle" data-toggle="dropdown"
                                        aria-hidden="true"></i>
                                     <!-- start sub menu -->
@@ -133,36 +134,23 @@
                         пожаловать</h1>
                     <!-- end page title -->
                     <!-- start sub title -->
-                    <span class="display-block margin-10px-top text-extra-small alt-font text-uppercase text-light-gray">на крупнейший образовательный проект</span>
+                    <span class="display-block margin-10px-top text-extra-small alt-font text-uppercase text-light-gray margin-15px-bottom">на крупнейший образовательный проект</span>
                     <!-- end sub title -->
+                    <a href="https://player.vimeo.com/video/75976293"
+                       class="popup-vimeo btn btn-block btn-transparent-white width-60" style="margin-left: auto;margin-right: auto;">обучающее видео</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!--@yield('content')-->
-
+<noscript><h4 class="text-center margin-30px-tb">Для корректной работы сайта у Вас должен быть включен javascript.</h4></noscript>
 {!! ssr('js/vue/entry-server.js')
         ->context([
             'user' => auth()->user(),
         ])
         ->fallback('<div id="app"></div>')
         ->render() !!}
-<!-- start footer -->
-{{--<footer class="wow fadeIn bg-extra-dark-gray">--}}
-    {{--<div class="padding-50px-tb xs-padding-30px-tb">--}}
-        {{--<div class="container">--}}
-            {{--<div class="row">--}}
-                {{--<!-- start logo -->--}}
-                {{--<div class="col-md-12 col-sm-12 col-xs-12 text-center">--}}
-                    {{--Чисто футер--}}
-                {{--</div>--}}
-                {{--<!-- end logo -->--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-{{--</footer>--}}
 <!-- end footer -->
 <!-- start scroll to top -->
 <a class="scroll-top-arrow" href="javascript:void(0);"><i class="ti-arrow-up"></i></a>
@@ -173,7 +161,8 @@
             'csrfToken' => csrf_token(),
             'user' => auth()->user(),
             'baseUrl' => URL::to('/')
-        ])
+        ]);
+    @yield('script')
 </script>
 
 <script src="{{ mix('js/vue/entry-client.js') }}"></script>

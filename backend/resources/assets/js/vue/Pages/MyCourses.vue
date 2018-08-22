@@ -6,13 +6,13 @@
                     <div class="col-md-12 col-sm-12 col-xs-12 text-center center-col last-paragraph-no-margin margin-50px-bottom  sm-margin-50px-bottom xs-margin-30px-bottomm">
                         <span class="text-extra-large display-block alt-font text-extra-dark-gray margin-10px-bottom font-weight-600">Курсы, на которые вы подписаны</span>
                     </div>
-                    <transition name="fade">
-                        <main class="col-md-12 col-sm-12 col-xs-12 left-sidebar pull-right sm-margin-60px-bottom xs-margin-40px-bottom"
-                              v-if="mounted">
+                    <!--<transition name="fade">-->
+                        <main class="col-md-12 col-sm-12 col-xs-12 left-sidebar pull-right sm-margin-60px-bottom xs-margin-40px-bottom">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="margin-20px-bottom">
-                                        <div class="col-md-12 col-sm-12 col-xs-12 blog-post-content margin-30px-bottom xs-margin-30px-bottom xs-text-center" v-for="educationalClass in classes">
+                                        <div class="col-md-12 col-sm-12 col-xs-12 blog-post-content margin-30px-bottom xs-margin-30px-bottom xs-text-center"
+                                             v-for="educationalClass in classes">
                                             <div class="blog-text border-all display-inline-block width-100 padding-30px-all padding-20px-tb xs-padding-20px-tb xs-padding-20px-all">
                                                 <div class="row">
                                                     <div class="col-md-12">
@@ -32,7 +32,7 @@
                                             </div>
                                         </div>
                                         <infinite-loading @infinite="append" spinner="waveDots"
-                                                          ref="infiniteLoading">
+                                                          ref="infiniteLoading" v-if="mounted">
                                             <span slot="no-more">Это все курсы.</span>
                                             <span slot="no-results">Это все курсы. </span>
                                         </infinite-loading>
@@ -49,26 +49,47 @@
                                 </div>
                             </div>
                         </main>
-                    </transition>
+                    <!--</transition>-->
                 </div>
             </div>
         </section>
+        <transition name="fade">
+            <page-loader v-if="!mounted"></page-loader>
+        </transition>
     </div>
 </template>
 <script>
-    import axios from 'axios'
     import InfiniteLoading from 'vue-infinite-loading'
+    import pageLoader from '../components/Pageloader'
 
     export default {
         components: {
             InfiniteLoading,
+            pageLoader
         },
+//        async asyncData({store, route}) {
+//            console.log('asyncdata...');
+//
+//            return await store.dispatch('getMyClasses', {
+//                query: {
+//                    skip: 0,
+//                    limit: 2,
+//                },
+//            });
+//        },
         data() {
             return {
-                classes: [],
                 busy: false,
                 mounted: false,
                 distance: -Infinity,
+            }
+        },
+        computed: {
+            user() {
+                return this.$store.getters.user;
+            },
+            classes() {
+                return this.$store.state.getClassesData;
             }
         },
         methods: {
@@ -76,28 +97,39 @@
                 this.mounted = false;
 
                 this.busy = true;
-                axios.get('/api/home.getMyClasses/0/9').then((response) => {
-                    this.classes = response.data.classes;
-                    this.busy = false;
 
-                    this.mounted = true;
-                });
+                this.$store.dispatch('getMyClasses', {
+                        query: {
+                            skip: 0,
+                            limit: 2,
+                        },
+                    })
+                    .then(() => {
+                        this.busy = false;
+                        this.mounted = true;
+                    });
             },
             append ($state) {
                 this.busy = true;
 
-                let url = `/api/home.getMyClasses/${this.classes.length}/3`;
+                this.$store.dispatch('getMyClasses', {
+                    query: {
+                        skip: this.classes.length,
+                        take: 3,
+                    },
+                    concat: true,
+                })
+                    .then((classes) => {
+                        this.busy = false;
 
-                axios.get(url).then((response) => {
-                    this.busy = false;
-                    $state.loaded();
+                        $state.loaded();
 
-                    if (response.data.classes.length) {
-                        this.classes = response.data.classes.concat(this.classes);
-                    } else {
-                        $state.complete();
-                    }
-                });
+                        console.log(classes);
+
+                        if (!classes.length) {
+                            $state.complete();
+                        }
+                    });
             },
             manualLoad(event) {
                 event.target.blur();

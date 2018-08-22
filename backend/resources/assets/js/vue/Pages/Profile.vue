@@ -8,7 +8,36 @@
                         <p class="width-70 sm-width-80 xs-width-100 center-col">Так сейчас выглядит ваш профиль, <b>{{ user.name }}</b></p>
                     </div>
                     <div class="col-md-12">
-                        <pre>{{ user }}</pre>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Property</th>
+                                <th>Value</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(value, key) in user">
+                                    <td>{{ key }}</td>
+                                    <td>
+                                        <span>{{ value }}</span>
+                                        <table class="table" v-if="Array.isArray(value)" v-for="obj in value">
+                                            <thead>
+                                            <tr>
+                                                <th>Property</th>
+                                                <th>Value</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr v-for="(v,k) in obj">
+                                                    <td>{{ k }}</td>
+                                                    <td>{{ v }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
 
                         <router-link
                                 :to="{ name: 'home' }"

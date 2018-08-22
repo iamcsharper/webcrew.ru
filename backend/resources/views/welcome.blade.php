@@ -183,9 +183,9 @@
                             экзаменам</h5>
                         <div class="btn-group">
                             <a href="https://player.vimeo.com/video/75976293"
-                               class="popup-vimeo btn btn-medium btn-transparent-deep-pink text-medium btn-rounded">смотреть
+                               class="popup-vimeo btn btn-medium btn-deep-pink text-medium btn-rounded">смотреть
                                 <i class="fab fa-youtube icon-very-small" aria-hidden="true"></i></a>
-                            <a href="#benefits" class="inner-link btn btn-medium btn-deep-pink text-medium btn-rounded">далее</a>
+                            <a href="#benefits" class="inner-link btn btn-medium btn-transparent-deep-pink text-medium btn-rounded">далее</a>
                         </div>
                     </div>
                 </div>
@@ -277,7 +277,7 @@
                             <div class="content">
                                 <figure>
                                     <i class="ti-face-smile icon-extra-medium text-deep-pink margin-20px-bottom"></i>
-                                    <span class="text-large alt-font display-block margin-10px-bottom text-white"> 108K человек</span>
+                                    <span class="text-large text-capitalize alt-font display-block margin-10px-bottom text-white"> {{ ucfirst($registers) }} человек</span>
                                     <div class="details">
                                         <p class="width-65 sm-width-90 center-col text-white">Уже зарегистрировались и
                                             ждут тебя</p>
@@ -294,7 +294,7 @@
                                 <figure>
                                     <i class="ti-control-shuffle icon-extra-medium text-deep-pink margin-20px-bottom"></i>
                                     <i class="ti-time icon-extra-medium text-deep-pink margin-20px-bottom"></i>
-                                    <span class="text-large alt-font display-block margin-10px-bottom text-white">Гибкие графики</span>
+                                    <span class="text-large text-capitalize alt-font display-block margin-10px-bottom text-white">Гибкие графики</span>
                                     <div class="details">
                                         <p class="width-65 sm-width-90 center-col text-white">Работайте с кем угодно,
                                             смотрите кого интересно</p>
@@ -310,7 +310,7 @@
                             <div class="content">
                                 <figure>
                                     <i class="ti-gift icon-extra-medium text-deep-pink margin-20px-bottom"></i>
-                                    <span class="text-large alt-font display-block margin-10px-bottom text-white">Регулярные акции</span>
+                                    <span class="text-large text-capitalize alt-font display-block margin-10px-bottom text-white">Регулярные акции</span>
                                     <div class="details">
                                         <p class="width-65 sm-width-90 center-col text-white">Для тех, кто жаждет знать
                                             больше</p>
@@ -326,7 +326,7 @@
                             <div class="content">
                                 <figure>
                                     <i class="ti-control-play icon-extra-medium text-deep-pink margin-20px-bottom"></i>
-                                    <span class="text-large alt-font display-block margin-10px-bottom text-white">Удобное приложение</span>
+                                    <span class="text-large text-capitalize alt-font display-block margin-10px-bottom text-white">Удобное приложение</span>
                                     <div class="details">
                                         <p class="width-65 sm-width-90 center-col text-white">Чтобы вы всегда оставались
                                             на связи</p>

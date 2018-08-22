@@ -11,6 +11,7 @@
 |
 */
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -20,18 +21,21 @@ Route::get('/', function () {
         return redirect('/home');
     }
 
-    return view('welcome');
+    return view('welcome', [
+        'registers' => User::prettyCount(),
+        'classes' => \App\EducationalClass::count(),
+    ]);
 });
 
 Auth::routes();
 
-Route::get('/home/{vue_capture?}', 'HomeController@index')->name('home')->where('vue_capture', '[\/\w\.-]*');
-Route::get('/courses/{vue_capture?}', 'HomeController@index')->name('courses')->where('vue_capture', '[\/\w\.-]*');
+Route::get('/home/{vue_capture?}', 'HomeController@listClasses')->name('home')->where('vue_capture', '[\/\w\.-]*');
+Route::get('/courses/{vue_capture?}', 'HomeController@listClasses')->name('courses')->where('vue_capture', '[\/\w\.-]*');
 
-Route::get('/api/home.getClasses/{skip?}/{take?}', 'HomeController@apiClasses');
+Route::get('/api/home.getClasses', 'HomeController@apiClasses');
 // As teacher
-Route::get('/api/home.getMyJobClasses/{skip?}/{take?}', 'HomeController@apiMyJobClasses');
-Route::get('/api/home.getMyClasses/{skip?}/{take?}', 'HomeController@apiMyClasses');
+Route::get('/api/home.getMyJobClasses', 'HomeController@apiMyJobClasses');
+Route::get('/api/home.getMyClasses', 'HomeController@apiMyClasses');
 
 
 // Auth group

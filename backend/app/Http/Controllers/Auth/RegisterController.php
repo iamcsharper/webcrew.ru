@@ -100,7 +100,7 @@ class RegisterController extends Controller
                 return response()->json([
                     'success' => false,
                     'errors' => $validator->errors()->toArray()
-                ]);
+                ], 503);
             }
 
             return view('auth/register')->withErrors($validator);
@@ -139,9 +139,9 @@ class RegisterController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return $request->ajax() ? response()->json([
-                'success' => false,
-                'errors' => ['Пустой код']]) : view('auth.error', ['error' => 'bad_token']);
+            return $request->ajax() ?
+                response()->json(['success' => false, 'errors' => ['Пустой код']])
+                : view('auth.error', ['error' => 'bad_token'], 503);
         }
 
         $user = User::where('email_token', $request->token)->first();
@@ -149,7 +149,8 @@ class RegisterController extends Controller
         if (is_null($user)) {
             return $request->ajax() ? response()->json([
                 'success' => false,
-                'errors' => ['Неверный код']]) : view('auth.error', ['error' => 'no_user']);
+                'errors' => ['Неверный код']])
+                : view('auth.error', ['error' => 'no_user']);
         }
 
         $user->verified = 1;

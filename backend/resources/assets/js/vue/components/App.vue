@@ -7,5 +7,6 @@
                 :duration="200">
             <router-view/>
         </transition>
+        <modals-container></modals-container>
     </div>
 </template>

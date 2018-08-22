@@ -34,11 +34,12 @@ class EducationalClass extends Model
     public static function getClassesWithActiveUser($uid) {
         return self::with([
             'teacher:id,name,promo_img,promo_desc',
-            'tags:name'
+            'tags:name',
+            'students',
         ])->withCount([
-            'students' => function ($query) use ($uid) {
+            'self_student' => function ($query) use ($uid) {
                 $query->select('students_subscriptions.student_id')->where(['students_subscriptions.student_id' => $uid, 'students_subscriptions.deleted_at' => null]);
-            }
+            },
         ]);
     }
 
@@ -56,6 +57,10 @@ class EducationalClass extends Model
 
     public function tags() {
         return $this->belongsToMany(Tag::class, 'class_tags', 'tag_id', 'class_id');
+    }
+
+    public function self_student() {
+        return $this->belongsToMany(User::class, 'students_subscriptions', 'student_id', 'class_id');
     }
 
     public function students() {

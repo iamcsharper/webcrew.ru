@@ -1,20 +1,37 @@
 /* global context, dispatch */
 
-import appSettings from './app';
-import addMiddleware from './addMiddleware';
+import createApp from './app';
 import renderVueComponentToString from 'vue-server-renderer/basic';
 
-appSettings.store.commit('setUser', context.user);
+const {app, router, store } = createApp(context.user);
 
-addMiddleware(appSettings);
+new Promise((resolve, reject) => {
+    router.push(context.url);
+    router.onReady(() => {
+        const matchedComponents = router.getMatchedComponents();
+        if (!matchedComponents.length) {
+            return reject({ code: 404 });
+        }
 
-const app = new appSettings.Vue(appSettings);
+        Promise.all(matchedComponents.map(Component => {
+            if (Component.asyncData) {
+                return Component.asyncData({
+                    store,
+                    route: router.currentRoute
+                });
+            }
+        })).then(() => {
+            context.state = store.state;
 
-app.$router.push(context.url);
-
-renderVueComponentToString(app, (err, html) => {
-    if (err) {
-        throw new Error(err);
-    }
-    dispatch(html);
-});
+            resolve(app)
+        }).catch(reject);
+    }, reject);
+})
+    .then(app => {
+        renderVueComponentToString(app, (err, res) => {
+            dispatch(res);
+        });
+    })
+    .catch((err) => {
+        dispatch(err);
+    });

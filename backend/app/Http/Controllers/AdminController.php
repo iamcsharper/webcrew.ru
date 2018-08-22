@@ -45,7 +45,7 @@ class AdminController extends Controller
             return response()->json([
                 'success' => false,
                 'errors' => ['user_not_found']
-            ]);
+            ], 503);
         }
 
         $user->delete();

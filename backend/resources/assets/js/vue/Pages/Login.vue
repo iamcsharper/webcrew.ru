@@ -49,9 +49,20 @@
                                 </router-link>
                             </div>
                         </div>
-                        <div class="padding-fifteen-all bg-white border-radius-6 md-padding-seven-all"
-                             v-if="done">
-                            <h6>Вход выполнен, ожидайте перехода.</h6>
+                        <div class="modal-dialog modal-confirm" v-if="done">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <div class="icon-box">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                    <button type="button" class="close">&times;</button>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <h4>Отлично!</h4>
+                                    <p>Вход выполнен, ожидайте</p>
+                                    <a class="btn btn-success" href="/"><span>Выполнить переход</span> <i class="fas fa-angle-right"></i></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </form>

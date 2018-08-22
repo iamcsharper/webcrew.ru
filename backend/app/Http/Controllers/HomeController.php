@@ -6,9 +6,14 @@ use App\EducationalClass;
 use App\User;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Helpers\ServerSideRenderHelper as SSRH;
+
 
 class HomeController extends Controller
 {
+    use SSRH;
+
     /**
      * Create a new controller instance.
      *
@@ -17,29 +22,36 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('role:teacher')->only(['apiJobMyClasses']);
+        $this->middleware('is_ajax')->only(['apiJobMyClasses', 'apiMyClasses', 'apiClasses']);
     }
 
     /**
-     * Show the application dashboard.
-     *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function listClasses(Request $request)
     {
         return view('home');
     }
 
-    private function addSkipLimit($query, Request $request) {
-        if($request->skip) {
-            $query = $query->skip($request->skip);
+    private function addExtras($query, Request $request)
+    {
+        if ($request->query('skip')) {
+            $query = $query->skip($request->query('skip'));
         } else {
             $query = $query->skip(0);
         }
 
-        if ($request->limit) {
-            $query = $query->limit($request->limit);
+        if ($request->query('limit')) {
+            $query = $query->limit($request->query('limit'));
         } else {
-            $query = $query->limit(1000);
+            $query = $query->limit(5);
+        }
+
+        if ($request->query('sort')) {
+            $query = $query->orderBy($request->query('sort'),
+                is_null($request->query('order')) ? 'ASC' : $request->query('order'));
         }
 
         /** @var Builder $query */
@@ -48,16 +60,10 @@ class HomeController extends Controller
 
     public function apiMyJobClasses(Request $request)
     {
-        if (!$request->ajax()) {
-            return [
-                'error' => 'non_ajax_query'
-            ];
-        }
-
         $query = EducationalClass::getClassesWithActiveUser(auth()->id());
 
         return [
-            'classes' => $this->addSkipLimit($query, $request)
+            'classes' => $this->addExtras($query, $request)
                 ->where('teacher_id', auth()->id())
                 ->get(),
         ];
@@ -65,32 +71,21 @@ class HomeController extends Controller
 
     public function apiMyClasses(Request $request)
     {
-        if (!$request->ajax()) {
-            return [
-                'error' => 'non_ajax_query'
-            ];
-        }
-
         $user = auth()->user();
 
         return [
-            'classes' => $this->addSkipLimit($user->student_classes(), $request)->get()
+            'classes' => $this->addExtras($user->student_classes(), $request)->get()
         ];
     }
 
     public function apiClasses(Request $request)
     {
-        if (!$request->ajax()) {
-            return [
-                'error' => 'non_ajax_query'
-            ];
-        }
-
         $query = EducationalClass::getClassesWithActiveUser(auth()->id());
 
+        $classes = $this->addExtras($query, $request)->get();
+
         return [
-            'classes' => $this->addSkipLimit($query, $request)
-                ->get(),
+            'classes' => $classes,
         ];
     }
 }

@@ -42,6 +42,28 @@ class User extends Authenticatable
         return $this->personal;
     }
 
+    public static function prettyCount() {
+        $count = self::count();
+
+        if ($count >= 50) {
+            return '>50';
+        }
+
+        if ($count >= 100) {
+            return '>100';
+        }
+
+        if ($count >= 1000) {
+            return '>' . (ceil($count / 1000) * 1000) . 'K';
+        }
+
+        if ($count >= 1000000) {
+            return '>' . (ceil($count / 1000) * 1000) . 'K';
+        }
+
+        return "тысячи";
+    }
+
     /**
      * Assume this is a student
      */

@@ -1,13 +1,8 @@
 require('./bootstrap');
 
-import appSettings from './app';
-import addMiddleware from './addMiddleware';
+import createApp from './app';
 
-appSettings.store.commit('setUser', window.Laravel.user);
-
-addMiddleware(appSettings);
-
-const app = new appSettings.Vue(appSettings);
+const { app } = createApp(window.Laravel.user);
 
 window.Vue = app;
 

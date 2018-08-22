@@ -81,7 +81,7 @@ class LoginController extends Controller
                 'success' => false,
                 'errors' => ['Аккаунт не активарован. Проверьте вашу почту.'],
                 'csrf_token' => csrf_token()
-            ]);
+            ], 503);
         }
 
         return response()->json(['success' => true]);
@@ -94,6 +94,6 @@ class LoginController extends Controller
     protected function sendFailedLoginResponse(Request $request)
     {
         $request->session()->put('login_error', trans('auth.failed'));
-        return response()->json(['errors' => ['Неверный логин или пароль']]);
+        return response()->json(['errors' => ['Неверный логин или пароль']], 503);
     }
 }
